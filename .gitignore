@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.log
+# Dart
+dart/.dart_tool/
+dart/pubspec.lock
