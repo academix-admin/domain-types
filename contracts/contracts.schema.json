@@ -619,7 +619,7 @@
     },
     "BackendReferredUserData": {
       "type": "object", "additionalProperties": false,
-      "required": ["users_referred_id", "users_referred_status", "users_names", "users_username"],
+      "required": ["users_referred_id", "users_referred_status", "users_names", "users_username", "users_image"],
       "properties": {
         "users_referred_id": { "type": "string" },
         "users_referred_status": { "type": "string" },

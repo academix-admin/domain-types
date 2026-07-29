@@ -550,7 +550,7 @@ export interface BackendRoleData {
 }
 
 export interface BackendReferredUserData {
-    users_image?:          null | string;
+    users_image:           null | string;
     users_names:           string;
     users_referred_id:     string;
     users_referred_status: string;

@@ -1958,7 +1958,7 @@ class BackendReferredUserData {
     String usersUsername;
 
     BackendReferredUserData({
-        this.usersImage,
+        required this.usersImage,
         required this.usersNames,
         required this.usersReferredId,
         required this.usersReferredStatus,
