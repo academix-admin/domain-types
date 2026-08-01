@@ -544,9 +544,12 @@ export interface BackendLanguageData {
 }
 
 export interface BackendRoleData {
-    roles_checker: string;
-    roles_id:      string;
-    roles_level:   number;
+    roles_can_contribute?:     boolean;
+    roles_can_create_private?: boolean;
+    roles_can_review?:         boolean;
+    roles_checker:             string;
+    roles_id:                  string;
+    roles_level:               number;
 }
 
 export interface BackendReferredUserData {

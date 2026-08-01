@@ -595,7 +595,10 @@
       "properties": {
         "roles_id": { "type": "string" },
         "roles_level": { "type": "number" },
-        "roles_checker": { "type": "string" }
+        "roles_checker": { "type": "string" },
+        "roles_can_contribute": { "type": "boolean" },
+        "roles_can_create_private": { "type": "boolean" },
+        "roles_can_review": { "type": "boolean" }
       }
     },
     "BackendLanguageData": {

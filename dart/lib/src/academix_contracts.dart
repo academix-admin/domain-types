@@ -1927,23 +1927,35 @@ class BackendLanguageData {
 }
 
 class BackendRoleData {
+    bool? rolesCanContribute;
+    bool? rolesCanCreatePrivate;
+    bool? rolesCanReview;
     String rolesChecker;
     String rolesId;
     double rolesLevel;
 
     BackendRoleData({
+        this.rolesCanContribute,
+        this.rolesCanCreatePrivate,
+        this.rolesCanReview,
         required this.rolesChecker,
         required this.rolesId,
         required this.rolesLevel,
     });
 
     factory BackendRoleData.fromJson(Map<String, dynamic> json) => BackendRoleData(
+        rolesCanContribute: json["roles_can_contribute"],
+        rolesCanCreatePrivate: json["roles_can_create_private"],
+        rolesCanReview: json["roles_can_review"],
         rolesChecker: json["roles_checker"],
         rolesId: json["roles_id"],
         rolesLevel: json["roles_level"]?.toDouble(),
     );
 
     Map<String, dynamic> toJson() => {
+        "roles_can_contribute": rolesCanContribute,
+        "roles_can_create_private": rolesCanCreatePrivate,
+        "roles_can_review": rolesCanReview,
         "roles_checker": rolesChecker,
         "roles_id": rolesId,
         "roles_level": rolesLevel,

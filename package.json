@@ -1,6 +1,6 @@
 {
   "name": "@academix-admin/domain-types",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "description": "Single source of truth for Academix domain types — generated Supabase row types + the RPC/Lambda wire contracts + shared status enums. Consumed across web, lambda, desktop; the canonical input for generating Dart (mobile) models. Git-tracked, not published to npm.",
   "type": "module",
