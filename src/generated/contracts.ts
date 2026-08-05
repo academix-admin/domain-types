@@ -506,12 +506,11 @@ export interface BackendUserBalanceModel {
 }
 
 /**
- * get_user_record — the signed-in user profile
+ * get_user_record — the signed-in user profile. country_id/language_id are NOT returned at
+ * top level; they live only nested under country_table/language_table.
  */
 export interface BackendUserData {
-    country_id:              string;
     country_table?:          BackendCountryData | null;
-    language_id:             string;
     language_table?:         BackendLanguageData | null;
     roles_table?:            BackendRoleData | null;
     transaction_id?:         null | string;

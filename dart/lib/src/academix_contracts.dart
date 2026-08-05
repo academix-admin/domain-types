@@ -1785,11 +1785,10 @@ class BackendUserBalanceModel {
 }
 
 
-///get_user_record — the signed-in user profile
+///get_user_record — the signed-in user profile. country_id/language_id are NOT returned at
+///top level; they live only nested under country_table/language_table.
 class BackendUserData {
-    String countryId;
     BackendCountryData? countryTable;
-    String languageId;
     BackendLanguageData? languageTable;
     BackendRoleData? rolesTable;
     String? transactionId;
@@ -1808,9 +1807,7 @@ class BackendUserData {
     bool usersVerified;
 
     BackendUserData({
-        required this.countryId,
         this.countryTable,
-        required this.languageId,
         this.languageTable,
         this.rolesTable,
         this.transactionId,
@@ -1830,9 +1827,7 @@ class BackendUserData {
     });
 
     factory BackendUserData.fromJson(Map<String, dynamic> json) => BackendUserData(
-        countryId: json["country_id"],
         countryTable: json["country_table"] == null ? null : BackendCountryData.fromJson(json["country_table"]),
-        languageId: json["language_id"],
         languageTable: json["language_table"] == null ? null : BackendLanguageData.fromJson(json["language_table"]),
         rolesTable: json["roles_table"] == null ? null : BackendRoleData.fromJson(json["roles_table"]),
         transactionId: json["transaction_id"],
@@ -1852,9 +1847,7 @@ class BackendUserData {
     );
 
     Map<String, dynamic> toJson() => {
-        "country_id": countryId,
         "country_table": countryTable?.toJson(),
-        "language_id": languageId,
         "language_table": languageTable?.toJson(),
         "roles_table": rolesTable?.toJson(),
         "transaction_id": transactionId,

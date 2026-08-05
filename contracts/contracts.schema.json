@@ -565,8 +565,8 @@
 
     "BackendUserData": {
       "type": "object", "additionalProperties": false,
-      "description": "get_user_record — the signed-in user profile",
-      "required": ["users_id", "users_username", "users_names", "users_email", "users_dob", "users_sex", "users_verified", "country_id", "language_id", "users_created_at"],
+      "description": "get_user_record — the signed-in user profile. country_id/language_id are NOT returned at top level; they live only nested under country_table/language_table.",
+      "required": ["users_id", "users_username", "users_names", "users_email", "users_dob", "users_sex", "users_verified", "users_created_at"],
       "properties": {
         "users_id": { "type": "string" },
         "users_username": { "type": "string" },
@@ -578,8 +578,6 @@
         "users_image": { "type": ["string", "null"] },
         "users_referred_id": { "type": ["string", "null"] },
         "users_verified": { "type": "boolean" },
-        "country_id": { "type": "string" },
-        "language_id": { "type": "string" },
         "users_created_at": { "type": "string" },
         "transaction_id": { "type": ["string", "null"] },
         "users_roles_access": {},
