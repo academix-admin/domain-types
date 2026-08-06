@@ -109,10 +109,13 @@ export interface AchievementsRequirement {
     count: number;
 }
 
+/**
+ * reward_table.reward_limit is a nullable column (unlimited-claim rewards leave it unset).
+ */
 export interface BackendRewardDetails {
     reward_id:          string;
     reward_instruction: string;
-    reward_limit:       number;
+    reward_limit:       number | null;
     reward_type:        string;
     reward_value:       number;
 }
@@ -133,10 +136,13 @@ export interface BackendBuyPaymentWalletModel {
     sort_created_id:              string;
 }
 
+/**
+ * game_mode_table.game_mode_checker/game_mode_identity are both nullable columns.
+ */
 export interface BackendChallengeConfig {
     challenge_options:  BackendChallengeOption[];
-    game_mode_checker:  string;
-    game_mode_identity: string;
+    game_mode_checker:  null | string;
+    game_mode_identity: null | string;
 }
 
 export interface BackendChallengeOption {
@@ -757,10 +763,15 @@ export interface BackendUserData {
     users_verified:          boolean;
 }
 
+/**
+ * country_table is nullable at the DB level (users_table.country_id is FK-enforced NOT
+ * NULL, but country_table.country_image itself is a nullable column — not every country has
+ * an uploaded image yet).
+ */
 export interface BackendCountryData {
     country_id:           string;
     country_identity:     string;
-    country_image:        string;
+    country_image:        null | string;
     country_two_iso_code: string;
 }
 
@@ -852,10 +863,13 @@ export interface BackendChallengeModel {
     game_mode_details?:           BackendGameModeModel | null;
 }
 
+/**
+ * game_mode_table.game_mode_checker/game_mode_identity are both nullable columns.
+ */
 export interface BackendGameModeModel {
-    game_mode_checker:  string;
+    game_mode_checker:  null | string;
     game_mode_id:       string;
-    game_mode_identity: string;
+    game_mode_identity: null | string;
 }
 
 /**

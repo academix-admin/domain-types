@@ -521,11 +521,12 @@
     },
     "BackendRewardDetails": {
       "type": "object", "additionalProperties": false,
+      "description": "reward_table.reward_limit is a nullable column (unlimited-claim rewards leave it unset).",
       "required": ["reward_id", "reward_type", "reward_limit", "reward_value", "reward_instruction"],
       "properties": {
         "reward_id": { "type": "string" },
         "reward_type": { "type": "string" },
-        "reward_limit": { "type": "number" },
+        "reward_limit": { "type": ["number", "null"] },
         "reward_value": { "type": "number" },
         "reward_instruction": { "type": "string" }
       }
@@ -903,11 +904,12 @@
     },
     "BackendCountryData": {
       "type": "object", "additionalProperties": false,
+      "description": "country_table is nullable at the DB level (users_table.country_id is FK-enforced NOT NULL, but country_table.country_image itself is a nullable column — not every country has an uploaded image yet).",
       "required": ["country_id", "country_identity", "country_image", "country_two_iso_code"],
       "properties": {
         "country_id": { "type": "string" },
         "country_identity": { "type": "string" },
-        "country_image": { "type": "string" },
+        "country_image": { "type": ["string", "null"] },
         "country_two_iso_code": { "type": "string" }
       }
     },
@@ -987,11 +989,12 @@
     },
     "BackendChallengeConfig": {
       "type": "object", "additionalProperties": false,
+      "description": "game_mode_table.game_mode_checker/game_mode_identity are both nullable columns.",
       "required": ["challenge_options", "game_mode_checker", "game_mode_identity"],
       "properties": {
         "challenge_options": { "type": "array", "items": { "$ref": "#/definitions/BackendChallengeOption" } },
-        "game_mode_checker": { "type": "string" },
-        "game_mode_identity": { "type": "string" }
+        "game_mode_checker": { "type": ["string", "null"] },
+        "game_mode_identity": { "type": ["string", "null"] }
       }
     },
     "BackendChallengeOption": {
@@ -1088,11 +1091,12 @@
     },
     "BackendGameModeModel": {
       "type": "object", "additionalProperties": false,
+      "description": "game_mode_table.game_mode_checker/game_mode_identity are both nullable columns.",
       "required": ["game_mode_id", "game_mode_identity", "game_mode_checker"],
       "properties": {
         "game_mode_id": { "type": "string" },
-        "game_mode_identity": { "type": "string" },
-        "game_mode_checker": { "type": "string" }
+        "game_mode_identity": { "type": ["string", "null"] },
+        "game_mode_checker": { "type": ["string", "null"] }
       }
     }
   }

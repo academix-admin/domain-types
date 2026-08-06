@@ -397,10 +397,12 @@ class AchievementsRequirement {
     };
 }
 
+
+///reward_table.reward_limit is a nullable column (unlimited-claim rewards leave it unset).
 class BackendRewardDetails {
     String rewardId;
     String rewardInstruction;
-    double rewardLimit;
+    double? rewardLimit;
     String rewardType;
     double rewardValue;
 
@@ -483,10 +485,12 @@ class BackendBuyPaymentWalletModel {
     };
 }
 
+
+///game_mode_table.game_mode_checker/game_mode_identity are both nullable columns.
 class BackendChallengeConfig {
     List<BackendChallengeOption> challengeOptions;
-    String gameModeChecker;
-    String gameModeIdentity;
+    String? gameModeChecker;
+    String? gameModeIdentity;
 
     BackendChallengeConfig({
         required this.challengeOptions,
@@ -2542,10 +2546,14 @@ class BackendUserData {
     };
 }
 
+
+///country_table is nullable at the DB level (users_table.country_id is FK-enforced NOT
+///NULL, but country_table.country_image itself is a nullable column — not every country has
+///an uploaded image yet).
 class BackendCountryData {
     String countryId;
     String countryIdentity;
-    String countryImage;
+    String? countryImage;
     String countryTwoIsoCode;
 
     BackendCountryData({
@@ -2909,10 +2917,12 @@ class BackendChallengeModel {
     };
 }
 
+
+///game_mode_table.game_mode_checker/game_mode_identity are both nullable columns.
 class BackendGameModeModel {
-    String gameModeChecker;
+    String? gameModeChecker;
     String gameModeId;
-    String gameModeIdentity;
+    String? gameModeIdentity;
 
     BackendGameModeModel({
         required this.gameModeChecker,
