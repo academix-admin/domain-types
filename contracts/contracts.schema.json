@@ -30,9 +30,53 @@
     "backendUserData": { "$ref": "#/definitions/BackendUserData" },
     "backendPoolQuestion": { "$ref": "#/definitions/BackendPoolQuestion" },
     "backendChallengeConfigRoot": { "$ref": "#/definitions/BackendChallengeConfigRoot" },
-    "backendUserDisplayQuizTopicModel": { "$ref": "#/definitions/BackendUserDisplayQuizTopicModel" }
+    "backendUserDisplayQuizTopicModel": { "$ref": "#/definitions/BackendUserDisplayQuizTopicModel" },
+    "backendCreatorCategoryRow": { "$ref": "#/definitions/BackendCreatorCategoryRow" }
   },
   "definitions": {
+    "BackendCreatorCategoryRow": {
+      "type": "object", "additionalProperties": false,
+      "description": "fetch_categories row — a creator's topic category (post category_group removal; topic_category is top-level). Keys mirror the RPC's jsonb_build_object projection.",
+      "required": ["topic_category_id", "topic_category_created_at", "topic_category_updated_at", "topic_category_identity", "sort_created_id", "sort_updated_id"],
+      "properties": {
+        "topic_category_id": { "type": "string" },
+        "topic_category_image": { "type": ["string", "null"] },
+        "topic_category_created_at": { "type": "string" },
+        "topic_category_updated_at": { "type": "string" },
+        "topic_category_identity": { "type": "string" },
+        "sort_created_id": { "type": "string" },
+        "sort_updated_id": { "type": "string" },
+        "reviewer_id": { "type": ["string", "null"] },
+        "approval": { "type": ["string", "null"] },
+        "user_created_topic": { "type": ["number", "null"] },
+        "user_created_question": { "type": ["number", "null"] },
+        "topic_settings": { "oneOf": [{ "$ref": "#/definitions/BackendCreatorTopicSettings" }, { "type": "null" }] },
+        "creator_details": { "oneOf": [{ "$ref": "#/definitions/BackendCreatorCategoryCreator" }, { "type": "null" }] },
+        "age_control": {},
+        "country_control": {},
+        "language_control": {},
+        "gender_control": {}
+      }
+    },
+    "BackendCreatorTopicSettings": {
+      "type": "object", "additionalProperties": false,
+      "description": "topic_settings block within a fetch_categories row.",
+      "properties": {
+        "is_favourite": { "type": ["boolean", "null"] },
+        "is_recents": { "type": ["boolean", "null"] },
+        "settings_updated_at": { "type": ["string", "null"] }
+      }
+    },
+    "BackendCreatorCategoryCreator": {
+      "type": "object", "additionalProperties": false,
+      "description": "creator_details block (get_user_fields) within a fetch_categories row.",
+      "properties": {
+        "users_id": { "type": ["string", "null"] },
+        "users_names": { "type": ["string", "null"] },
+        "users_username": { "type": ["string", "null"] },
+        "users_image": { "type": ["string", "null"] }
+      }
+    },
     "GetUserBalanceResponse": {
       "type": "object", "additionalProperties": false,
       "description": "public.get_user_balance response envelope",

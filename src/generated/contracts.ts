@@ -10,6 +10,7 @@ export interface AcademixContracts {
     backendAchievementsModel?:         BackendAchievementsModel;
     backendBuyPaymentWalletModel?:     BackendBuyPaymentWalletModel;
     backendChallengeConfigRoot?:       { [key: string]: BackendChallengeConfig };
+    backendCreatorCategoryRow?:        BackendCreatorCategoryRow;
     backendDailyPerformance?:          BackendDailyPerformance;
     backendDailyStreaksModel?:         BackendDailyStreaksModel;
     backendFriendsModel?:              BackendFriendsModel;
@@ -123,6 +124,49 @@ export interface BackendChallengeOption {
     challenge_reviewer_share:     number;
     challenge_role_share:         { [key: string]: number };
     challenge_top_share:          number;
+}
+
+/**
+ * fetch_categories row — a creator's topic category (post category_group removal;
+ * topic_category is top-level). Keys mirror the RPC's jsonb_build_object projection.
+ */
+export interface BackendCreatorCategoryRow {
+    age_control?:              any;
+    approval?:                 null | string;
+    country_control?:          any;
+    creator_details?:          BackendCreatorCategoryCreator | null;
+    gender_control?:           any;
+    language_control?:         any;
+    reviewer_id?:              null | string;
+    sort_created_id:           string;
+    sort_updated_id:           string;
+    topic_category_created_at: string;
+    topic_category_id:         string;
+    topic_category_identity:   string;
+    topic_category_image?:     null | string;
+    topic_category_updated_at: string;
+    topic_settings?:           BackendCreatorTopicSettings | null;
+    user_created_question?:    number | null;
+    user_created_topic?:       number | null;
+}
+
+/**
+ * creator_details block (get_user_fields) within a fetch_categories row.
+ */
+export interface BackendCreatorCategoryCreator {
+    users_id?:       null | string;
+    users_image?:    null | string;
+    users_names?:    null | string;
+    users_username?: null | string;
+}
+
+/**
+ * topic_settings block within a fetch_categories row.
+ */
+export interface BackendCreatorTopicSettings {
+    is_favourite?:        boolean | null;
+    is_recents?:          boolean | null;
+    settings_updated_at?: null | string;
 }
 
 /**

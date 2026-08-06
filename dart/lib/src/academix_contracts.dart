@@ -19,6 +19,7 @@ class AcademixContracts {
     BackendAchievementsModel? backendAchievementsModel;
     BackendBuyPaymentWalletModel? backendBuyPaymentWalletModel;
     Map<String, BackendChallengeConfig>? backendChallengeConfigRoot;
+    BackendCreatorCategoryRow? backendCreatorCategoryRow;
     BackendDailyPerformance? backendDailyPerformance;
     BackendDailyStreaksModel? backendDailyStreaksModel;
     BackendFriendsModel? backendFriendsModel;
@@ -47,6 +48,7 @@ class AcademixContracts {
         this.backendAchievementsModel,
         this.backendBuyPaymentWalletModel,
         this.backendChallengeConfigRoot,
+        this.backendCreatorCategoryRow,
         this.backendDailyPerformance,
         this.backendDailyStreaksModel,
         this.backendFriendsModel,
@@ -76,6 +78,7 @@ class AcademixContracts {
         backendAchievementsModel: json["backendAchievementsModel"] == null ? null : BackendAchievementsModel.fromJson(json["backendAchievementsModel"]),
         backendBuyPaymentWalletModel: json["backendBuyPaymentWalletModel"] == null ? null : BackendBuyPaymentWalletModel.fromJson(json["backendBuyPaymentWalletModel"]),
         backendChallengeConfigRoot: Map.from(json["backendChallengeConfigRoot"]!).map((k, v) => MapEntry<String, BackendChallengeConfig>(k, BackendChallengeConfig.fromJson(v))),
+        backendCreatorCategoryRow: json["backendCreatorCategoryRow"] == null ? null : BackendCreatorCategoryRow.fromJson(json["backendCreatorCategoryRow"]),
         backendDailyPerformance: json["backendDailyPerformance"] == null ? null : BackendDailyPerformance.fromJson(json["backendDailyPerformance"]),
         backendDailyStreaksModel: json["backendDailyStreaksModel"] == null ? null : BackendDailyStreaksModel.fromJson(json["backendDailyStreaksModel"]),
         backendFriendsModel: json["backendFriendsModel"] == null ? null : BackendFriendsModel.fromJson(json["backendFriendsModel"]),
@@ -105,6 +108,7 @@ class AcademixContracts {
         "backendAchievementsModel": backendAchievementsModel?.toJson(),
         "backendBuyPaymentWalletModel": backendBuyPaymentWalletModel?.toJson(),
         "backendChallengeConfigRoot": Map.from(backendChallengeConfigRoot!).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
+        "backendCreatorCategoryRow": backendCreatorCategoryRow?.toJson(),
         "backendDailyPerformance": backendDailyPerformance?.toJson(),
         "backendDailyStreaksModel": backendDailyStreaksModel?.toJson(),
         "backendFriendsModel": backendFriendsModel?.toJson(),
@@ -461,6 +465,145 @@ class BackendChallengeOption {
         "challenge_reviewer_share": challengeReviewerShare,
         "challenge_role_share": Map.from(challengeRoleShare).map((k, v) => MapEntry<String, dynamic>(k, v)),
         "challenge_top_share": challengeTopShare,
+    };
+}
+
+
+///fetch_categories row — a creator's topic category (post category_group removal;
+///topic_category is top-level). Keys mirror the RPC's jsonb_build_object projection.
+class BackendCreatorCategoryRow {
+    dynamic ageControl;
+    String? approval;
+    dynamic countryControl;
+    BackendCreatorCategoryCreator? creatorDetails;
+    dynamic genderControl;
+    dynamic languageControl;
+    String? reviewerId;
+    String sortCreatedId;
+    String sortUpdatedId;
+    String topicCategoryCreatedAt;
+    String topicCategoryId;
+    String topicCategoryIdentity;
+    String? topicCategoryImage;
+    String topicCategoryUpdatedAt;
+    BackendCreatorTopicSettings? topicSettings;
+    double? userCreatedQuestion;
+    double? userCreatedTopic;
+
+    BackendCreatorCategoryRow({
+        this.ageControl,
+        this.approval,
+        this.countryControl,
+        this.creatorDetails,
+        this.genderControl,
+        this.languageControl,
+        this.reviewerId,
+        required this.sortCreatedId,
+        required this.sortUpdatedId,
+        required this.topicCategoryCreatedAt,
+        required this.topicCategoryId,
+        required this.topicCategoryIdentity,
+        this.topicCategoryImage,
+        required this.topicCategoryUpdatedAt,
+        this.topicSettings,
+        this.userCreatedQuestion,
+        this.userCreatedTopic,
+    });
+
+    factory BackendCreatorCategoryRow.fromJson(Map<String, dynamic> json) => BackendCreatorCategoryRow(
+        ageControl: json["age_control"],
+        approval: json["approval"],
+        countryControl: json["country_control"],
+        creatorDetails: json["creator_details"] == null ? null : BackendCreatorCategoryCreator.fromJson(json["creator_details"]),
+        genderControl: json["gender_control"],
+        languageControl: json["language_control"],
+        reviewerId: json["reviewer_id"],
+        sortCreatedId: json["sort_created_id"],
+        sortUpdatedId: json["sort_updated_id"],
+        topicCategoryCreatedAt: json["topic_category_created_at"],
+        topicCategoryId: json["topic_category_id"],
+        topicCategoryIdentity: json["topic_category_identity"],
+        topicCategoryImage: json["topic_category_image"],
+        topicCategoryUpdatedAt: json["topic_category_updated_at"],
+        topicSettings: json["topic_settings"] == null ? null : BackendCreatorTopicSettings.fromJson(json["topic_settings"]),
+        userCreatedQuestion: json["user_created_question"]?.toDouble(),
+        userCreatedTopic: json["user_created_topic"]?.toDouble(),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "age_control": ageControl,
+        "approval": approval,
+        "country_control": countryControl,
+        "creator_details": creatorDetails?.toJson(),
+        "gender_control": genderControl,
+        "language_control": languageControl,
+        "reviewer_id": reviewerId,
+        "sort_created_id": sortCreatedId,
+        "sort_updated_id": sortUpdatedId,
+        "topic_category_created_at": topicCategoryCreatedAt,
+        "topic_category_id": topicCategoryId,
+        "topic_category_identity": topicCategoryIdentity,
+        "topic_category_image": topicCategoryImage,
+        "topic_category_updated_at": topicCategoryUpdatedAt,
+        "topic_settings": topicSettings?.toJson(),
+        "user_created_question": userCreatedQuestion,
+        "user_created_topic": userCreatedTopic,
+    };
+}
+
+
+///creator_details block (get_user_fields) within a fetch_categories row.
+class BackendCreatorCategoryCreator {
+    String? usersId;
+    String? usersImage;
+    String? usersNames;
+    String? usersUsername;
+
+    BackendCreatorCategoryCreator({
+        this.usersId,
+        this.usersImage,
+        this.usersNames,
+        this.usersUsername,
+    });
+
+    factory BackendCreatorCategoryCreator.fromJson(Map<String, dynamic> json) => BackendCreatorCategoryCreator(
+        usersId: json["users_id"],
+        usersImage: json["users_image"],
+        usersNames: json["users_names"],
+        usersUsername: json["users_username"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "users_id": usersId,
+        "users_image": usersImage,
+        "users_names": usersNames,
+        "users_username": usersUsername,
+    };
+}
+
+
+///topic_settings block within a fetch_categories row.
+class BackendCreatorTopicSettings {
+    bool? isFavourite;
+    bool? isRecents;
+    String? settingsUpdatedAt;
+
+    BackendCreatorTopicSettings({
+        this.isFavourite,
+        this.isRecents,
+        this.settingsUpdatedAt,
+    });
+
+    factory BackendCreatorTopicSettings.fromJson(Map<String, dynamic> json) => BackendCreatorTopicSettings(
+        isFavourite: json["is_favourite"],
+        isRecents: json["is_recents"],
+        settingsUpdatedAt: json["settings_updated_at"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "is_favourite": isFavourite,
+        "is_recents": isRecents,
+        "settings_updated_at": settingsUpdatedAt,
     };
 }
 
