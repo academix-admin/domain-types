@@ -19,11 +19,16 @@ class AcademixContracts {
     BackendAchievementsModel? backendAchievementsModel;
     BackendBuyPaymentWalletModel? backendBuyPaymentWalletModel;
     Map<String, BackendChallengeConfig>? backendChallengeConfigRoot;
+    BackendControlItem? backendControlItem;
+    BackendCountryRow? backendCountryRow;
     BackendCreatorCategoryRow? backendCreatorCategoryRow;
     BackendDailyPerformance? backendDailyPerformance;
     BackendDailyStreaksModel? backendDailyStreaksModel;
+    BackendDecisionOptionModel? backendDecisionOptionModel;
+    BackendEvaluationResult? backendEvaluationResult;
     BackendFriendsModel? backendFriendsModel;
     BackendGiveBackModel? backendGiveBackModel;
+    BackendLanguageRow? backendLanguageRow;
     BackendMissionData? backendMissionData;
     BackendMissionModel? backendMissionModel;
     BackendPaymentCompletionData? backendPaymentCompletionData;
@@ -33,14 +38,20 @@ class AcademixContracts {
     BackendPoolQuestion? backendPoolQuestion;
     BackendQuizHistory? backendQuizHistory;
     BackendRedeemCodeModel? backendRedeemCodeModel;
+    BackendRedirectResult? backendRedirectResult;
+    BackendReferralData? backendReferralData;
     BackendRewardClaimModel? backendRewardClaimModel;
     BackendRolesActivationData? backendRolesActivationData;
+    BackendRolesRow? backendRolesRow;
     BackendSellPaymentWalletModel? backendSellPaymentWalletModel;
     BackendTransactionModel? backendTransactionModel;
+    BackendTransactionStatusUpdate? backendTransactionStatusUpdate;
     BackendUserBalanceModel? backendUserBalanceModel;
     BackendUserData? backendUserData;
     BackendUserDisplayQuizTopicModel? backendUserDisplayQuizTopicModel;
     BackendUserEngagementModel? backendUserEngagementModel;
+    BackendUserLoginRecord? backendUserLoginRecord;
+    BackendUserPartialRecord? backendUserPartialRecord;
     GetUserBalanceResponse? getUserBalanceResponse;
 
     AcademixContracts({
@@ -48,11 +59,16 @@ class AcademixContracts {
         this.backendAchievementsModel,
         this.backendBuyPaymentWalletModel,
         this.backendChallengeConfigRoot,
+        this.backendControlItem,
+        this.backendCountryRow,
         this.backendCreatorCategoryRow,
         this.backendDailyPerformance,
         this.backendDailyStreaksModel,
+        this.backendDecisionOptionModel,
+        this.backendEvaluationResult,
         this.backendFriendsModel,
         this.backendGiveBackModel,
+        this.backendLanguageRow,
         this.backendMissionData,
         this.backendMissionModel,
         this.backendPaymentCompletionData,
@@ -62,14 +78,20 @@ class AcademixContracts {
         this.backendPoolQuestion,
         this.backendQuizHistory,
         this.backendRedeemCodeModel,
+        this.backendRedirectResult,
+        this.backendReferralData,
         this.backendRewardClaimModel,
         this.backendRolesActivationData,
+        this.backendRolesRow,
         this.backendSellPaymentWalletModel,
         this.backendTransactionModel,
+        this.backendTransactionStatusUpdate,
         this.backendUserBalanceModel,
         this.backendUserData,
         this.backendUserDisplayQuizTopicModel,
         this.backendUserEngagementModel,
+        this.backendUserLoginRecord,
+        this.backendUserPartialRecord,
         this.getUserBalanceResponse,
     });
 
@@ -78,11 +100,16 @@ class AcademixContracts {
         backendAchievementsModel: json["backendAchievementsModel"] == null ? null : BackendAchievementsModel.fromJson(json["backendAchievementsModel"]),
         backendBuyPaymentWalletModel: json["backendBuyPaymentWalletModel"] == null ? null : BackendBuyPaymentWalletModel.fromJson(json["backendBuyPaymentWalletModel"]),
         backendChallengeConfigRoot: Map.from(json["backendChallengeConfigRoot"]!).map((k, v) => MapEntry<String, BackendChallengeConfig>(k, BackendChallengeConfig.fromJson(v))),
+        backendControlItem: json["backendControlItem"] == null ? null : BackendControlItem.fromJson(json["backendControlItem"]),
+        backendCountryRow: json["backendCountryRow"] == null ? null : BackendCountryRow.fromJson(json["backendCountryRow"]),
         backendCreatorCategoryRow: json["backendCreatorCategoryRow"] == null ? null : BackendCreatorCategoryRow.fromJson(json["backendCreatorCategoryRow"]),
         backendDailyPerformance: json["backendDailyPerformance"] == null ? null : BackendDailyPerformance.fromJson(json["backendDailyPerformance"]),
         backendDailyStreaksModel: json["backendDailyStreaksModel"] == null ? null : BackendDailyStreaksModel.fromJson(json["backendDailyStreaksModel"]),
+        backendDecisionOptionModel: json["backendDecisionOptionModel"] == null ? null : BackendDecisionOptionModel.fromJson(json["backendDecisionOptionModel"]),
+        backendEvaluationResult: json["backendEvaluationResult"] == null ? null : BackendEvaluationResult.fromJson(json["backendEvaluationResult"]),
         backendFriendsModel: json["backendFriendsModel"] == null ? null : BackendFriendsModel.fromJson(json["backendFriendsModel"]),
         backendGiveBackModel: json["backendGiveBackModel"] == null ? null : BackendGiveBackModel.fromJson(json["backendGiveBackModel"]),
+        backendLanguageRow: json["backendLanguageRow"] == null ? null : BackendLanguageRow.fromJson(json["backendLanguageRow"]),
         backendMissionData: json["backendMissionData"] == null ? null : BackendMissionData.fromJson(json["backendMissionData"]),
         backendMissionModel: json["backendMissionModel"] == null ? null : BackendMissionModel.fromJson(json["backendMissionModel"]),
         backendPaymentCompletionData: json["backendPaymentCompletionData"] == null ? null : BackendPaymentCompletionData.fromJson(json["backendPaymentCompletionData"]),
@@ -92,14 +119,20 @@ class AcademixContracts {
         backendPoolQuestion: json["backendPoolQuestion"] == null ? null : BackendPoolQuestion.fromJson(json["backendPoolQuestion"]),
         backendQuizHistory: json["backendQuizHistory"] == null ? null : BackendQuizHistory.fromJson(json["backendQuizHistory"]),
         backendRedeemCodeModel: json["backendRedeemCodeModel"] == null ? null : BackendRedeemCodeModel.fromJson(json["backendRedeemCodeModel"]),
+        backendRedirectResult: json["backendRedirectResult"] == null ? null : BackendRedirectResult.fromJson(json["backendRedirectResult"]),
+        backendReferralData: json["backendReferralData"] == null ? null : BackendReferralData.fromJson(json["backendReferralData"]),
         backendRewardClaimModel: json["backendRewardClaimModel"] == null ? null : BackendRewardClaimModel.fromJson(json["backendRewardClaimModel"]),
         backendRolesActivationData: json["backendRolesActivationData"] == null ? null : BackendRolesActivationData.fromJson(json["backendRolesActivationData"]),
+        backendRolesRow: json["backendRolesRow"] == null ? null : BackendRolesRow.fromJson(json["backendRolesRow"]),
         backendSellPaymentWalletModel: json["backendSellPaymentWalletModel"] == null ? null : BackendSellPaymentWalletModel.fromJson(json["backendSellPaymentWalletModel"]),
         backendTransactionModel: json["backendTransactionModel"] == null ? null : BackendTransactionModel.fromJson(json["backendTransactionModel"]),
+        backendTransactionStatusUpdate: json["backendTransactionStatusUpdate"] == null ? null : BackendTransactionStatusUpdate.fromJson(json["backendTransactionStatusUpdate"]),
         backendUserBalanceModel: json["backendUserBalanceModel"] == null ? null : BackendUserBalanceModel.fromJson(json["backendUserBalanceModel"]),
         backendUserData: json["backendUserData"] == null ? null : BackendUserData.fromJson(json["backendUserData"]),
         backendUserDisplayQuizTopicModel: json["backendUserDisplayQuizTopicModel"] == null ? null : BackendUserDisplayQuizTopicModel.fromJson(json["backendUserDisplayQuizTopicModel"]),
         backendUserEngagementModel: json["backendUserEngagementModel"] == null ? null : BackendUserEngagementModel.fromJson(json["backendUserEngagementModel"]),
+        backendUserLoginRecord: json["backendUserLoginRecord"] == null ? null : BackendUserLoginRecord.fromJson(json["backendUserLoginRecord"]),
+        backendUserPartialRecord: json["backendUserPartialRecord"] == null ? null : BackendUserPartialRecord.fromJson(json["backendUserPartialRecord"]),
         getUserBalanceResponse: json["getUserBalanceResponse"] == null ? null : GetUserBalanceResponse.fromJson(json["getUserBalanceResponse"]),
     );
 
@@ -108,11 +141,16 @@ class AcademixContracts {
         "backendAchievementsModel": backendAchievementsModel?.toJson(),
         "backendBuyPaymentWalletModel": backendBuyPaymentWalletModel?.toJson(),
         "backendChallengeConfigRoot": Map.from(backendChallengeConfigRoot!).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
+        "backendControlItem": backendControlItem?.toJson(),
+        "backendCountryRow": backendCountryRow?.toJson(),
         "backendCreatorCategoryRow": backendCreatorCategoryRow?.toJson(),
         "backendDailyPerformance": backendDailyPerformance?.toJson(),
         "backendDailyStreaksModel": backendDailyStreaksModel?.toJson(),
+        "backendDecisionOptionModel": backendDecisionOptionModel?.toJson(),
+        "backendEvaluationResult": backendEvaluationResult?.toJson(),
         "backendFriendsModel": backendFriendsModel?.toJson(),
         "backendGiveBackModel": backendGiveBackModel?.toJson(),
+        "backendLanguageRow": backendLanguageRow?.toJson(),
         "backendMissionData": backendMissionData?.toJson(),
         "backendMissionModel": backendMissionModel?.toJson(),
         "backendPaymentCompletionData": backendPaymentCompletionData?.toJson(),
@@ -122,14 +160,20 @@ class AcademixContracts {
         "backendPoolQuestion": backendPoolQuestion?.toJson(),
         "backendQuizHistory": backendQuizHistory?.toJson(),
         "backendRedeemCodeModel": backendRedeemCodeModel?.toJson(),
+        "backendRedirectResult": backendRedirectResult?.toJson(),
+        "backendReferralData": backendReferralData?.toJson(),
         "backendRewardClaimModel": backendRewardClaimModel?.toJson(),
         "backendRolesActivationData": backendRolesActivationData?.toJson(),
+        "backendRolesRow": backendRolesRow?.toJson(),
         "backendSellPaymentWalletModel": backendSellPaymentWalletModel?.toJson(),
         "backendTransactionModel": backendTransactionModel?.toJson(),
+        "backendTransactionStatusUpdate": backendTransactionStatusUpdate?.toJson(),
         "backendUserBalanceModel": backendUserBalanceModel?.toJson(),
         "backendUserData": backendUserData?.toJson(),
         "backendUserDisplayQuizTopicModel": backendUserDisplayQuizTopicModel?.toJson(),
         "backendUserEngagementModel": backendUserEngagementModel?.toJson(),
+        "backendUserLoginRecord": backendUserLoginRecord?.toJson(),
+        "backendUserPartialRecord": backendUserPartialRecord?.toJson(),
         "getUserBalanceResponse": getUserBalanceResponse?.toJson(),
     };
 }
@@ -469,6 +513,81 @@ class BackendChallengeOption {
 }
 
 
+///get_fresh_control_details row, and the shape of each entry in the
+///age_control/country_control/language_control/gender_control arrays returned by
+///fetch_categories/submit_*_content etc.
+class BackendControlItem {
+    String controlKey;
+    String? controlTitle;
+    bool controlValue;
+
+    BackendControlItem({
+        required this.controlKey,
+        this.controlTitle,
+        required this.controlValue,
+    });
+
+    factory BackendControlItem.fromJson(Map<String, dynamic> json) => BackendControlItem(
+        controlKey: json["control_key"],
+        controlTitle: json["control_title"],
+        controlValue: json["control_value"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "control_key": controlKey,
+        "control_title": controlTitle,
+        "control_value": controlValue,
+    };
+}
+
+
+///fetch_country row (the full country record — a wider shape than the nested country_table
+///block under get_user_record/BackendCountryData).
+class BackendCountryRow {
+    String countryCreatedAt;
+    String countryId;
+    String countryIdentity;
+    String? countryImage;
+    String countryPhoneCode;
+    double countryPhoneDigit;
+    String countryThreeIsoCode;
+    String countryTwoIsoCode;
+
+    BackendCountryRow({
+        required this.countryCreatedAt,
+        required this.countryId,
+        required this.countryIdentity,
+        this.countryImage,
+        required this.countryPhoneCode,
+        required this.countryPhoneDigit,
+        required this.countryThreeIsoCode,
+        required this.countryTwoIsoCode,
+    });
+
+    factory BackendCountryRow.fromJson(Map<String, dynamic> json) => BackendCountryRow(
+        countryCreatedAt: json["country_created_at"],
+        countryId: json["country_id"],
+        countryIdentity: json["country_identity"],
+        countryImage: json["country_image"],
+        countryPhoneCode: json["country_phone_code"],
+        countryPhoneDigit: json["country_phone_digit"]?.toDouble(),
+        countryThreeIsoCode: json["country_three_iso_code"],
+        countryTwoIsoCode: json["country_two_iso_code"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "country_created_at": countryCreatedAt,
+        "country_id": countryId,
+        "country_identity": countryIdentity,
+        "country_image": countryImage,
+        "country_phone_code": countryPhoneCode,
+        "country_phone_digit": countryPhoneDigit,
+        "country_three_iso_code": countryThreeIsoCode,
+        "country_two_iso_code": countryTwoIsoCode,
+    };
+}
+
+
 ///fetch_categories row — a creator's topic category (post category_group removal;
 ///topic_category is top-level). Keys mirror the RPC's jsonb_build_object projection.
 class BackendCreatorCategoryRow {
@@ -680,6 +799,89 @@ class BackendDailyStreaksModel {
 }
 
 
+///get_all_question_options row — the reviewer/creator-facing option shape that reveals
+///options_is_correct (never sent to players; distinct from BackendOptionModel). NOTE the
+///RPC's inconsistent key naming: option_image/option_min/option_max/option_unit (singular)
+///vs options_id/options_created_at/options_identity/options_is_correct (plural).
+class BackendDecisionOptionModel {
+    String? optionImage;
+    double? optionMax;
+    double? optionMin;
+    String? optionUnit;
+    String optionsCreatedAt;
+    String optionsId;
+    String optionsIdentity;
+    bool optionsIsCorrect;
+
+    BackendDecisionOptionModel({
+        this.optionImage,
+        this.optionMax,
+        this.optionMin,
+        this.optionUnit,
+        required this.optionsCreatedAt,
+        required this.optionsId,
+        required this.optionsIdentity,
+        required this.optionsIsCorrect,
+    });
+
+    factory BackendDecisionOptionModel.fromJson(Map<String, dynamic> json) => BackendDecisionOptionModel(
+        optionImage: json["option_image"],
+        optionMax: json["option_max"]?.toDouble(),
+        optionMin: json["option_min"]?.toDouble(),
+        optionUnit: json["option_unit"],
+        optionsCreatedAt: json["options_created_at"],
+        optionsId: json["options_id"],
+        optionsIdentity: json["options_identity"],
+        optionsIsCorrect: json["options_is_correct"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "option_image": optionImage,
+        "option_max": optionMax,
+        "option_min": optionMin,
+        "option_unit": optionUnit,
+        "options_created_at": optionsCreatedAt,
+        "options_id": optionsId,
+        "options_identity": optionsIdentity,
+        "options_is_correct": optionsIsCorrect,
+    };
+}
+
+
+///evaluate_question/evaluate_category/evaluate_topic result envelope.
+class BackendEvaluationResult {
+    String code;
+    String? message;
+    String? sort;
+    String? status;
+    String? time;
+
+    BackendEvaluationResult({
+        required this.code,
+        this.message,
+        this.sort,
+        this.status,
+        this.time,
+    });
+
+    factory BackendEvaluationResult.fromJson(Map<String, dynamic> json) => BackendEvaluationResult(
+        code: json["code"],
+        message: json["message"],
+        sort: json["sort"],
+        status: json["status"],
+        time: json["time"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "code": code,
+        "message": message,
+        "sort": sort,
+        "status": status,
+        "time": time,
+    };
+}
+
+
 ///fetch_friends row
 class BackendFriendsModel {
     String sortCreatedId;
@@ -848,6 +1050,41 @@ class BackendGiveBackDetail {
         "redeem_rule_top": redeemRuleTop,
         "remaining_slots": remainingSlots,
         "sort_created_id": sortCreatedId,
+    };
+}
+
+
+///fetch_languages row (the full language record — a wider shape than the nested
+///language_table block under get_user_record/BackendLanguageData).
+class BackendLanguageRow {
+    String languageCode;
+    String languageCreatedAt;
+    String languageId;
+    String languageIdentity;
+    String? languageSymbol;
+
+    BackendLanguageRow({
+        required this.languageCode,
+        required this.languageCreatedAt,
+        required this.languageId,
+        required this.languageIdentity,
+        this.languageSymbol,
+    });
+
+    factory BackendLanguageRow.fromJson(Map<String, dynamic> json) => BackendLanguageRow(
+        languageCode: json["language_code"],
+        languageCreatedAt: json["language_created_at"],
+        languageId: json["language_id"],
+        languageIdentity: json["language_identity"],
+        languageSymbol: json["language_symbol"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "language_code": languageCode,
+        "language_created_at": languageCreatedAt,
+        "language_id": languageId,
+        "language_identity": languageIdentity,
+        "language_symbol": languageSymbol,
     };
 }
 
@@ -1481,24 +1718,31 @@ class BackendPoolTimeModel {
     };
 }
 
+
+///Shared shape for question_type_data/type_data blocks AND the standalone
+///fetch_question_types row (which additionally returns question_type_created_at).
 class BackendPoolTypeModel {
+    String? questionTypeCreatedAt;
     String questionTypeId;
     String questionTypeIdentity;
     String questionTypeLocalIdentity;
 
     BackendPoolTypeModel({
+        this.questionTypeCreatedAt,
         required this.questionTypeId,
         required this.questionTypeIdentity,
         required this.questionTypeLocalIdentity,
     });
 
     factory BackendPoolTypeModel.fromJson(Map<String, dynamic> json) => BackendPoolTypeModel(
+        questionTypeCreatedAt: json["question_type_created_at"],
         questionTypeId: json["question_type_id"],
         questionTypeIdentity: json["question_type_identity"],
         questionTypeLocalIdentity: json["question_type_local_identity"],
     );
 
     Map<String, dynamic> toJson() => {
+        "question_type_created_at": questionTypeCreatedAt,
         "question_type_id": questionTypeId,
         "question_type_identity": questionTypeIdentity,
         "question_type_local_identity": questionTypeLocalIdentity,
@@ -1626,6 +1870,63 @@ class BackendRedeemCodeModel {
 }
 
 
+///consume_redirect result.
+class BackendRedirectResult {
+    String? error;
+    String? redirectTo;
+    String status;
+    String? userId;
+
+    BackendRedirectResult({
+        this.error,
+        this.redirectTo,
+        required this.status,
+        this.userId,
+    });
+
+    factory BackendRedirectResult.fromJson(Map<String, dynamic> json) => BackendRedirectResult(
+        error: json["error"],
+        redirectTo: json["redirectTo"],
+        status: json["status"],
+        userId: json["userId"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "error": error,
+        "redirectTo": redirectTo,
+        "status": status,
+        "userId": userId,
+    };
+}
+
+
+///get_referral_data — a minimal users_table slice used to preview a referrer by username.
+///Do NOT reuse BackendFriendsModel for this: it requires fields this RPC never returns.
+class BackendReferralData {
+    String usersId;
+    String usersNames;
+    String usersUsername;
+
+    BackendReferralData({
+        required this.usersId,
+        required this.usersNames,
+        required this.usersUsername,
+    });
+
+    factory BackendReferralData.fromJson(Map<String, dynamic> json) => BackendReferralData(
+        usersId: json["users_id"],
+        usersNames: json["users_names"],
+        usersUsername: json["users_username"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "users_id": usersId,
+        "users_names": usersNames,
+        "users_username": usersUsername,
+    };
+}
+
+
 ///claim_user_achievements / claim_user_mission reward_claim_details
 class BackendRewardClaimModel {
     double rewardClaimAmount;
@@ -1674,6 +1975,48 @@ class BackendRolesActivationData {
         "roles_activation_amount": rolesActivationAmount,
         "roles_activation_is_fresh": rolesActivationIsFresh,
         "transaction_id": transactionId,
+    };
+}
+
+
+///fetch_roles row (the full role record).
+class BackendRolesRow {
+    dynamic rolesBuyIn;
+    String rolesChecker;
+    String rolesCreatedAt;
+    String rolesId;
+    String rolesIdentity;
+    double rolesLevel;
+    dynamic rolesPerks;
+
+    BackendRolesRow({
+        this.rolesBuyIn,
+        required this.rolesChecker,
+        required this.rolesCreatedAt,
+        required this.rolesId,
+        required this.rolesIdentity,
+        required this.rolesLevel,
+        this.rolesPerks,
+    });
+
+    factory BackendRolesRow.fromJson(Map<String, dynamic> json) => BackendRolesRow(
+        rolesBuyIn: json["roles_buy_in"],
+        rolesChecker: json["roles_checker"],
+        rolesCreatedAt: json["roles_created_at"],
+        rolesId: json["roles_id"],
+        rolesIdentity: json["roles_identity"],
+        rolesLevel: json["roles_level"]?.toDouble(),
+        rolesPerks: json["roles_perks"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "roles_buy_in": rolesBuyIn,
+        "roles_checker": rolesChecker,
+        "roles_created_at": rolesCreatedAt,
+        "roles_id": rolesId,
+        "roles_identity": rolesIdentity,
+        "roles_level": rolesLevel,
+        "roles_perks": rolesPerks,
     };
 }
 
@@ -1898,6 +2241,34 @@ class BackendUserDetails {
         "payment_details": paymentDetails?.toJson(),
         "users_id": usersId,
         "users_names": usersNames,
+    };
+}
+
+
+///update_user_payment result — a minimal transaction_table slice (id + both statuses only).
+///Do NOT reuse BackendTransactionModel for this: it requires many fields this RPC never
+///returns.
+class BackendTransactionStatusUpdate {
+    String transactionId;
+    String transactionReceiverStatus;
+    String transactionSenderStatus;
+
+    BackendTransactionStatusUpdate({
+        required this.transactionId,
+        required this.transactionReceiverStatus,
+        required this.transactionSenderStatus,
+    });
+
+    factory BackendTransactionStatusUpdate.fromJson(Map<String, dynamic> json) => BackendTransactionStatusUpdate(
+        transactionId: json["transaction_id"],
+        transactionReceiverStatus: json["transaction_receiver_status"],
+        transactionSenderStatus: json["transaction_sender_status"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "transaction_id": transactionId,
+        "transaction_receiver_status": transactionReceiverStatus,
+        "transaction_sender_status": transactionSenderStatus,
     };
 }
 
@@ -2480,6 +2851,73 @@ class BackendHomeEngagementProgress {
         "next_engagement_levels_id": nextEngagementLevelsId,
         "next_engagement_levels_identity": nextEngagementLevelsIdentity,
         "points_to_next_level": pointsToNextLevel,
+    };
+}
+
+
+///get_user_login_record — a minimal users_table slice used to resolve the login type
+///pre-auth. Do NOT reuse BackendUserData for this: it requires many fields this RPC never
+///returns.
+class BackendUserLoginRecord {
+    String usersDob;
+    String? usersEmail;
+    String usersLoginType;
+    String usersNames;
+    String? usersPhone;
+    String usersSex;
+
+    BackendUserLoginRecord({
+        required this.usersDob,
+        this.usersEmail,
+        required this.usersLoginType,
+        required this.usersNames,
+        this.usersPhone,
+        required this.usersSex,
+    });
+
+    factory BackendUserLoginRecord.fromJson(Map<String, dynamic> json) => BackendUserLoginRecord(
+        usersDob: json["users_dob"],
+        usersEmail: json["users_email"],
+        usersLoginType: json["users_login_type"],
+        usersNames: json["users_names"],
+        usersPhone: json["users_phone"],
+        usersSex: json["users_sex"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "users_dob": usersDob,
+        "users_email": usersEmail,
+        "users_login_type": usersLoginType,
+        "users_names": usersNames,
+        "users_phone": usersPhone,
+        "users_sex": usersSex,
+    };
+}
+
+
+///get_partial_user_record — a minimal users_table slice used pre-login. Do NOT reuse
+///BackendUserData for this: it requires many fields this RPC never returns.
+class BackendUserPartialRecord {
+    String usersDob;
+    String usersId;
+    String usersSex;
+
+    BackendUserPartialRecord({
+        required this.usersDob,
+        required this.usersId,
+        required this.usersSex,
+    });
+
+    factory BackendUserPartialRecord.fromJson(Map<String, dynamic> json) => BackendUserPartialRecord(
+        usersDob: json["users_dob"],
+        usersId: json["users_id"],
+        usersSex: json["users_sex"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "users_dob": usersDob,
+        "users_id": usersId,
+        "users_sex": usersSex,
     };
 }
 

@@ -10,11 +10,16 @@ export interface AcademixContracts {
     backendAchievementsModel?:         BackendAchievementsModel;
     backendBuyPaymentWalletModel?:     BackendBuyPaymentWalletModel;
     backendChallengeConfigRoot?:       { [key: string]: BackendChallengeConfig };
+    backendControlItem?:               BackendControlItem;
+    backendCountryRow?:                BackendCountryRow;
     backendCreatorCategoryRow?:        BackendCreatorCategoryRow;
     backendDailyPerformance?:          BackendDailyPerformance;
     backendDailyStreaksModel?:         BackendDailyStreaksModel;
+    backendDecisionOptionModel?:       BackendDecisionOptionModel;
+    backendEvaluationResult?:          BackendEvaluationResult;
     backendFriendsModel?:              BackendFriendsModel;
     backendGiveBackModel?:             BackendGiveBackModel;
+    backendLanguageRow?:               BackendLanguageRow;
     backendMissionData?:               BackendMissionData;
     backendMissionModel?:              BackendMissionModel;
     backendPaymentCompletionData?:     BackendPaymentCompletionData;
@@ -24,14 +29,20 @@ export interface AcademixContracts {
     backendPoolQuestion?:              BackendPoolQuestion;
     backendQuizHistory?:               BackendQuizHistory;
     backendRedeemCodeModel?:           BackendRedeemCodeModel;
+    backendRedirectResult?:            BackendRedirectResult;
+    backendReferralData?:              BackendReferralData;
     backendRewardClaimModel?:          BackendRewardClaimModel;
     backendRolesActivationData?:       BackendRolesActivationData;
+    backendRolesRow?:                  BackendRolesRow;
     backendSellPaymentWalletModel?:    BackendSellPaymentWalletModel;
     backendTransactionModel?:          BackendTransactionModel;
+    backendTransactionStatusUpdate?:   BackendTransactionStatusUpdate;
     backendUserBalanceModel?:          BackendUserBalanceModel;
     backendUserData?:                  BackendUserData;
     backendUserDisplayQuizTopicModel?: BackendUserDisplayQuizTopicModel;
     backendUserEngagementModel?:       BackendUserEngagementModel;
+    backendUserLoginRecord?:           BackendUserLoginRecord;
+    backendUserPartialRecord?:         BackendUserPartialRecord;
     getUserBalanceResponse?:           GetUserBalanceResponse;
 }
 
@@ -127,6 +138,32 @@ export interface BackendChallengeOption {
 }
 
 /**
+ * get_fresh_control_details row, and the shape of each entry in the
+ * age_control/country_control/language_control/gender_control arrays returned by
+ * fetch_categories/submit_*_content etc.
+ */
+export interface BackendControlItem {
+    control_key:    string;
+    control_title?: null | string;
+    control_value:  boolean;
+}
+
+/**
+ * fetch_country row (the full country record — a wider shape than the nested country_table
+ * block under get_user_record/BackendCountryData).
+ */
+export interface BackendCountryRow {
+    country_created_at:     string;
+    country_id:             string;
+    country_identity:       string;
+    country_image?:         null | string;
+    country_phone_code:     string;
+    country_phone_digit:    number;
+    country_three_iso_code: string;
+    country_two_iso_code:   string;
+}
+
+/**
  * fetch_categories row — a creator's topic category (post category_group removal;
  * topic_category is top-level). Keys mirror the RPC's jsonb_build_object projection.
  */
@@ -193,6 +230,34 @@ export interface BackendDailyStreaksModel {
 }
 
 /**
+ * get_all_question_options row — the reviewer/creator-facing option shape that reveals
+ * options_is_correct (never sent to players; distinct from BackendOptionModel). NOTE the
+ * RPC's inconsistent key naming: option_image/option_min/option_max/option_unit (singular)
+ * vs options_id/options_created_at/options_identity/options_is_correct (plural).
+ */
+export interface BackendDecisionOptionModel {
+    option_image?:      null | string;
+    option_max?:        number | null;
+    option_min?:        number | null;
+    option_unit?:       null | string;
+    options_created_at: string;
+    options_id:         string;
+    options_identity:   string;
+    options_is_correct: boolean;
+}
+
+/**
+ * evaluate_question/evaluate_category/evaluate_topic result envelope.
+ */
+export interface BackendEvaluationResult {
+    code:     string;
+    message?: null | string;
+    sort?:    null | string;
+    status?:  null | string;
+    time?:    null | string;
+}
+
+/**
  * fetch_friends row
  */
 export interface BackendFriendsModel {
@@ -238,6 +303,18 @@ export interface BackendGiveBackDetail {
     redeem_rule_top:       boolean;
     remaining_slots:       number;
     sort_created_id:       string;
+}
+
+/**
+ * fetch_languages row (the full language record — a wider shape than the nested
+ * language_table block under get_user_record/BackendLanguageData).
+ */
+export interface BackendLanguageRow {
+    language_code:       string;
+    language_created_at: string;
+    language_id:         string;
+    language_identity:   string;
+    language_symbol?:    null | string;
 }
 
 /**
@@ -420,7 +497,12 @@ export interface BackendPoolTimeModel {
     question_time_value: number;
 }
 
+/**
+ * Shared shape for question_type_data/type_data blocks AND the standalone
+ * fetch_question_types row (which additionally returns question_type_created_at).
+ */
 export interface BackendPoolTypeModel {
+    question_type_created_at?:    null | string;
     question_type_id:             string;
     question_type_identity:       string;
     question_type_local_identity: string;
@@ -462,6 +544,26 @@ export interface BackendRedeemCodeModel {
 }
 
 /**
+ * consume_redirect result.
+ */
+export interface BackendRedirectResult {
+    error?:      null | string;
+    redirectTo?: null | string;
+    status:      string;
+    userId?:     null | string;
+}
+
+/**
+ * get_referral_data — a minimal users_table slice used to preview a referrer by username.
+ * Do NOT reuse BackendFriendsModel for this: it requires fields this RPC never returns.
+ */
+export interface BackendReferralData {
+    users_id:       string;
+    users_names:    string;
+    users_username: string;
+}
+
+/**
  * claim_user_achievements / claim_user_mission reward_claim_details
  */
 export interface BackendRewardClaimModel {
@@ -477,6 +579,19 @@ export interface BackendRolesActivationData {
     roles_activation_amount:    number;
     roles_activation_is_fresh?: boolean;
     transaction_id?:            null | string;
+}
+
+/**
+ * fetch_roles row (the full role record).
+ */
+export interface BackendRolesRow {
+    roles_buy_in?:    any;
+    roles_checker:    string;
+    roles_created_at: string;
+    roles_id:         string;
+    roles_identity:   string;
+    roles_level:      number;
+    roles_perks?:     any;
 }
 
 /**
@@ -538,6 +653,17 @@ export interface BackendUserDetails {
     payment_details?: BackendPaymentDetails | null;
     users_id?:        null | string;
     users_names:      string;
+}
+
+/**
+ * update_user_payment result — a minimal transaction_table slice (id + both statuses only).
+ * Do NOT reuse BackendTransactionModel for this: it requires many fields this RPC never
+ * returns.
+ */
+export interface BackendTransactionStatusUpdate {
+    transaction_id:              string;
+    transaction_receiver_status: string;
+    transaction_sender_status:   string;
 }
 
 /**
@@ -695,6 +821,30 @@ export interface BackendHomeEngagementProgress {
     next_engagement_levels_id:       number;
     next_engagement_levels_identity: string;
     points_to_next_level:            number;
+}
+
+/**
+ * get_user_login_record — a minimal users_table slice used to resolve the login type
+ * pre-auth. Do NOT reuse BackendUserData for this: it requires many fields this RPC never
+ * returns.
+ */
+export interface BackendUserLoginRecord {
+    users_dob:        string;
+    users_email?:     null | string;
+    users_login_type: string;
+    users_names:      string;
+    users_phone?:     null | string;
+    users_sex:        string;
+}
+
+/**
+ * get_partial_user_record — a minimal users_table slice used pre-login. Do NOT reuse
+ * BackendUserData for this: it requires many fields this RPC never returns.
+ */
+export interface BackendUserPartialRecord {
+    users_dob: string;
+    users_id:  string;
+    users_sex: string;
 }
 
 /**

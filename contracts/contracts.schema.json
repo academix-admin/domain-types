@@ -31,9 +31,152 @@
     "backendPoolQuestion": { "$ref": "#/definitions/BackendPoolQuestion" },
     "backendChallengeConfigRoot": { "$ref": "#/definitions/BackendChallengeConfigRoot" },
     "backendUserDisplayQuizTopicModel": { "$ref": "#/definitions/BackendUserDisplayQuizTopicModel" },
-    "backendCreatorCategoryRow": { "$ref": "#/definitions/BackendCreatorCategoryRow" }
+    "backendCreatorCategoryRow": { "$ref": "#/definitions/BackendCreatorCategoryRow" },
+    "backendCountryRow": { "$ref": "#/definitions/BackendCountryRow" },
+    "backendLanguageRow": { "$ref": "#/definitions/BackendLanguageRow" },
+    "backendRolesRow": { "$ref": "#/definitions/BackendRolesRow" },
+    "backendControlItem": { "$ref": "#/definitions/BackendControlItem" },
+    "backendDecisionOptionModel": { "$ref": "#/definitions/BackendDecisionOptionModel" },
+    "backendEvaluationResult": { "$ref": "#/definitions/BackendEvaluationResult" },
+    "backendRedirectResult": { "$ref": "#/definitions/BackendRedirectResult" },
+    "backendUserPartialRecord": { "$ref": "#/definitions/BackendUserPartialRecord" },
+    "backendUserLoginRecord": { "$ref": "#/definitions/BackendUserLoginRecord" },
+    "backendReferralData": { "$ref": "#/definitions/BackendReferralData" },
+    "backendTransactionStatusUpdate": { "$ref": "#/definitions/BackendTransactionStatusUpdate" }
   },
   "definitions": {
+    "BackendCountryRow": {
+      "type": "object", "additionalProperties": false,
+      "description": "fetch_country row (the full country record — a wider shape than the nested country_table block under get_user_record/BackendCountryData).",
+      "required": ["country_id", "country_identity", "country_created_at", "country_phone_digit", "country_phone_code", "country_two_iso_code", "country_three_iso_code"],
+      "properties": {
+        "country_id": { "type": "string" },
+        "country_identity": { "type": "string" },
+        "country_image": { "type": ["string", "null"] },
+        "country_created_at": { "type": "string" },
+        "country_phone_digit": { "type": "number" },
+        "country_phone_code": { "type": "string" },
+        "country_two_iso_code": { "type": "string" },
+        "country_three_iso_code": { "type": "string" }
+      }
+    },
+    "BackendLanguageRow": {
+      "type": "object", "additionalProperties": false,
+      "description": "fetch_languages row (the full language record — a wider shape than the nested language_table block under get_user_record/BackendLanguageData).",
+      "required": ["language_id", "language_identity", "language_created_at", "language_code"],
+      "properties": {
+        "language_id": { "type": "string" },
+        "language_identity": { "type": "string" },
+        "language_symbol": { "type": ["string", "null"] },
+        "language_created_at": { "type": "string" },
+        "language_code": { "type": "string" }
+      }
+    },
+    "BackendRolesRow": {
+      "type": "object", "additionalProperties": false,
+      "description": "fetch_roles row (the full role record).",
+      "required": ["roles_id", "roles_identity", "roles_level", "roles_checker", "roles_created_at"],
+      "properties": {
+        "roles_id": { "type": "string" },
+        "roles_identity": { "type": "string" },
+        "roles_level": { "type": "number" },
+        "roles_checker": { "type": "string" },
+        "roles_created_at": { "type": "string" },
+        "roles_buy_in": {},
+        "roles_perks": {}
+      }
+    },
+    "BackendControlItem": {
+      "type": "object", "additionalProperties": false,
+      "description": "get_fresh_control_details row, and the shape of each entry in the age_control/country_control/language_control/gender_control arrays returned by fetch_categories/submit_*_content etc.",
+      "required": ["control_key", "control_value"],
+      "properties": {
+        "control_key": { "type": "string" },
+        "control_value": { "type": "boolean" },
+        "control_title": { "type": ["string", "null"] }
+      }
+    },
+    "BackendDecisionOptionModel": {
+      "type": "object", "additionalProperties": false,
+      "description": "get_all_question_options row — the reviewer/creator-facing option shape that reveals options_is_correct (never sent to players; distinct from BackendOptionModel). NOTE the RPC's inconsistent key naming: option_image/option_min/option_max/option_unit (singular) vs options_id/options_created_at/options_identity/options_is_correct (plural).",
+      "required": ["options_id", "options_created_at", "options_identity", "options_is_correct"],
+      "properties": {
+        "options_id": { "type": "string" },
+        "option_image": { "type": ["string", "null"] },
+        "option_min": { "type": ["number", "null"] },
+        "option_max": { "type": ["number", "null"] },
+        "option_unit": { "type": ["string", "null"] },
+        "options_created_at": { "type": "string" },
+        "options_identity": { "type": "string" },
+        "options_is_correct": { "type": "boolean" }
+      }
+    },
+    "BackendEvaluationResult": {
+      "type": "object", "additionalProperties": false,
+      "description": "evaluate_question/evaluate_category/evaluate_topic result envelope.",
+      "required": ["code"],
+      "properties": {
+        "status": { "type": ["string", "null"] },
+        "code": { "type": "string" },
+        "time": { "type": ["string", "null"] },
+        "sort": { "type": ["string", "null"] },
+        "message": { "type": ["string", "null"] }
+      }
+    },
+    "BackendRedirectResult": {
+      "type": "object", "additionalProperties": false,
+      "description": "consume_redirect result.",
+      "required": ["status"],
+      "properties": {
+        "status": { "type": "string" },
+        "error": { "type": ["string", "null"] },
+        "userId": { "type": ["string", "null"] },
+        "redirectTo": { "type": ["string", "null"] }
+      }
+    },
+    "BackendUserPartialRecord": {
+      "type": "object", "additionalProperties": false,
+      "description": "get_partial_user_record — a minimal users_table slice used pre-login. Do NOT reuse BackendUserData for this: it requires many fields this RPC never returns.",
+      "required": ["users_id", "users_dob", "users_sex"],
+      "properties": {
+        "users_id": { "type": "string" },
+        "users_dob": { "type": "string" },
+        "users_sex": { "type": "string" }
+      }
+    },
+    "BackendUserLoginRecord": {
+      "type": "object", "additionalProperties": false,
+      "description": "get_user_login_record — a minimal users_table slice used to resolve the login type pre-auth. Do NOT reuse BackendUserData for this: it requires many fields this RPC never returns.",
+      "required": ["users_names", "users_dob", "users_sex", "users_login_type"],
+      "properties": {
+        "users_email": { "type": ["string", "null"] },
+        "users_names": { "type": "string" },
+        "users_dob": { "type": "string" },
+        "users_sex": { "type": "string" },
+        "users_login_type": { "type": "string" },
+        "users_phone": { "type": ["string", "null"] }
+      }
+    },
+    "BackendReferralData": {
+      "type": "object", "additionalProperties": false,
+      "description": "get_referral_data — a minimal users_table slice used to preview a referrer by username. Do NOT reuse BackendFriendsModel for this: it requires fields this RPC never returns.",
+      "required": ["users_id", "users_names", "users_username"],
+      "properties": {
+        "users_id": { "type": "string" },
+        "users_names": { "type": "string" },
+        "users_username": { "type": "string" }
+      }
+    },
+    "BackendTransactionStatusUpdate": {
+      "type": "object", "additionalProperties": false,
+      "description": "update_user_payment result — a minimal transaction_table slice (id + both statuses only). Do NOT reuse BackendTransactionModel for this: it requires many fields this RPC never returns.",
+      "required": ["transaction_id", "transaction_receiver_status", "transaction_sender_status"],
+      "properties": {
+        "transaction_id": { "type": "string" },
+        "transaction_receiver_status": { "type": "string" },
+        "transaction_sender_status": { "type": "string" }
+      }
+    },
     "BackendCreatorCategoryRow": {
       "type": "object", "additionalProperties": false,
       "description": "fetch_categories row — a creator's topic category (post category_group removal; topic_category is top-level). Keys mirror the RPC's jsonb_build_object projection.",
@@ -721,11 +864,13 @@
     },
     "BackendPoolTypeModel": {
       "type": "object", "additionalProperties": false,
+      "description": "Shared shape for question_type_data/type_data blocks AND the standalone fetch_question_types row (which additionally returns question_type_created_at).",
       "required": ["question_type_id", "question_type_identity", "question_type_local_identity"],
       "properties": {
         "question_type_id": { "type": "string" },
         "question_type_identity": { "type": "string" },
-        "question_type_local_identity": { "type": "string" }
+        "question_type_local_identity": { "type": "string" },
+        "question_type_created_at": { "type": ["string", "null"] }
       }
     },
 
