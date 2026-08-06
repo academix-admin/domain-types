@@ -40,6 +40,7 @@ export interface AcademixContracts {
     backendRolesActivationData?:       BackendRolesActivationData;
     backendRolesRow?:                  BackendRolesRow;
     backendSellPaymentWalletModel?:    BackendSellPaymentWalletModel;
+    backendSessionGateError?:          BackendSessionGateError;
     backendTransactionModel?:          BackendTransactionModel;
     backendTransactionStatusUpdate?:   BackendTransactionStatusUpdate;
     backendUserBalanceModel?:          BackendUserBalanceModel;
@@ -672,6 +673,23 @@ export interface BackendSellPaymentWalletModel {
     payment_wallet_sell_rate:      number;
     payment_wallet_sell_rate_type: string;
     sort_created_id:               string;
+}
+
+/**
+ * Response body of a PostgREST request refused by public.enforce_session() — the
+ * db_pre_request session gate (HTTP 423 app-locked, or HTTP 401 session-revoked). Every
+ * client (web fetch interceptor, Flutter SessionGateHttpClient, any future platform) parses
+ * this SAME shape instead of hand-decoding the raw PGRST sentinel. account_exists is only
+ * meaningful for AX_APP_LOCKED — it tells the client whether this is a real,
+ * previously-authenticated account (show the PIN unlock overlay) or a session with no
+ * profile yet (never happens in practice today, since a brand-new session gets a full idle
+ * window before it can lock, but clients must not assume — trust this field, not local
+ * cache state).
+ */
+export interface BackendSessionGateError {
+    account_exists: boolean;
+    code:           string;
+    message:        string;
 }
 
 /**

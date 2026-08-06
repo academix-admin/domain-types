@@ -49,7 +49,8 @@
     "backendAcademixRatioResult": { "$ref": "#/definitions/BackendAcademixRatioResult" },
     "backendContentResponse": { "$ref": "#/definitions/BackendContentResponse" },
     "backendLeaveQuizResult": { "$ref": "#/definitions/BackendLeaveQuizResult" },
-    "backendProfileUpdateResult": { "$ref": "#/definitions/BackendProfileUpdateResult" }
+    "backendProfileUpdateResult": { "$ref": "#/definitions/BackendProfileUpdateResult" },
+    "backendSessionGateError": { "$ref": "#/definitions/BackendSessionGateError" }
   },
   "definitions": {
     "BackendCreatorTypeDataRow": {
@@ -1097,6 +1098,16 @@
         "game_mode_id": { "type": "string" },
         "game_mode_identity": { "type": ["string", "null"] },
         "game_mode_checker": { "type": ["string", "null"] }
+      }
+    },
+    "BackendSessionGateError": {
+      "type": "object", "additionalProperties": false,
+      "description": "Response body of a PostgREST request refused by public.enforce_session() — the db_pre_request session gate (HTTP 423 app-locked, or HTTP 401 session-revoked). Every client (web fetch interceptor, Flutter SessionGateHttpClient, any future platform) parses this SAME shape instead of hand-decoding the raw PGRST sentinel. account_exists is only meaningful for AX_APP_LOCKED — it tells the client whether this is a real, previously-authenticated account (show the PIN unlock overlay) or a session with no profile yet (never happens in practice today, since a brand-new session gets a full idle window before it can lock, but clients must not assume — trust this field, not local cache state).",
+      "required": ["code", "message", "account_exists"],
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "account_exists": { "type": "boolean" }
       }
     }
   }

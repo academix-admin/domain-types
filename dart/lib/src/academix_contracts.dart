@@ -49,6 +49,7 @@ class AcademixContracts {
     BackendRolesActivationData? backendRolesActivationData;
     BackendRolesRow? backendRolesRow;
     BackendSellPaymentWalletModel? backendSellPaymentWalletModel;
+    BackendSessionGateError? backendSessionGateError;
     BackendTransactionModel? backendTransactionModel;
     BackendTransactionStatusUpdate? backendTransactionStatusUpdate;
     BackendUserBalanceModel? backendUserBalanceModel;
@@ -96,6 +97,7 @@ class AcademixContracts {
         this.backendRolesActivationData,
         this.backendRolesRow,
         this.backendSellPaymentWalletModel,
+        this.backendSessionGateError,
         this.backendTransactionModel,
         this.backendTransactionStatusUpdate,
         this.backendUserBalanceModel,
@@ -144,6 +146,7 @@ class AcademixContracts {
         backendRolesActivationData: json["backendRolesActivationData"] == null ? null : BackendRolesActivationData.fromJson(json["backendRolesActivationData"]),
         backendRolesRow: json["backendRolesRow"] == null ? null : BackendRolesRow.fromJson(json["backendRolesRow"]),
         backendSellPaymentWalletModel: json["backendSellPaymentWalletModel"] == null ? null : BackendSellPaymentWalletModel.fromJson(json["backendSellPaymentWalletModel"]),
+        backendSessionGateError: json["backendSessionGateError"] == null ? null : BackendSessionGateError.fromJson(json["backendSessionGateError"]),
         backendTransactionModel: json["backendTransactionModel"] == null ? null : BackendTransactionModel.fromJson(json["backendTransactionModel"]),
         backendTransactionStatusUpdate: json["backendTransactionStatusUpdate"] == null ? null : BackendTransactionStatusUpdate.fromJson(json["backendTransactionStatusUpdate"]),
         backendUserBalanceModel: json["backendUserBalanceModel"] == null ? null : BackendUserBalanceModel.fromJson(json["backendUserBalanceModel"]),
@@ -192,6 +195,7 @@ class AcademixContracts {
         "backendRolesActivationData": backendRolesActivationData?.toJson(),
         "backendRolesRow": backendRolesRow?.toJson(),
         "backendSellPaymentWalletModel": backendSellPaymentWalletModel?.toJson(),
+        "backendSessionGateError": backendSessionGateError?.toJson(),
         "backendTransactionModel": backendTransactionModel?.toJson(),
         "backendTransactionStatusUpdate": backendTransactionStatusUpdate?.toJson(),
         "backendUserBalanceModel": backendUserBalanceModel?.toJson(),
@@ -2236,6 +2240,40 @@ class BackendSellPaymentWalletModel {
         "payment_wallet_sell_rate": paymentWalletSellRate,
         "payment_wallet_sell_rate_type": paymentWalletSellRateType,
         "sort_created_id": sortCreatedId,
+    };
+}
+
+
+///Response body of a PostgREST request refused by public.enforce_session() — the
+///db_pre_request session gate (HTTP 423 app-locked, or HTTP 401 session-revoked). Every
+///client (web fetch interceptor, Flutter SessionGateHttpClient, any future platform) parses
+///this SAME shape instead of hand-decoding the raw PGRST sentinel. account_exists is only
+///meaningful for AX_APP_LOCKED — it tells the client whether this is a real,
+///previously-authenticated account (show the PIN unlock overlay) or a session with no
+///profile yet (never happens in practice today, since a brand-new session gets a full idle
+///window before it can lock, but clients must not assume — trust this field, not local
+///cache state).
+class BackendSessionGateError {
+    bool accountExists;
+    String code;
+    String message;
+
+    BackendSessionGateError({
+        required this.accountExists,
+        required this.code,
+        required this.message,
+    });
+
+    factory BackendSessionGateError.fromJson(Map<String, dynamic> json) => BackendSessionGateError(
+        accountExists: json["account_exists"],
+        code: json["code"],
+        message: json["message"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "account_exists": accountExists,
+        "code": code,
+        "message": message,
     };
 }
 
