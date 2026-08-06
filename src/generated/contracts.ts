@@ -13,6 +13,7 @@ export interface AcademixContracts {
     backendControlItem?:               BackendControlItem;
     backendCountryRow?:                BackendCountryRow;
     backendCreatorCategoryRow?:        BackendCreatorCategoryRow;
+    backendCreatorTypeDataRow?:        BackendCreatorTypeDataRow;
     backendDailyPerformance?:          BackendDailyPerformance;
     backendDailyStreaksModel?:         BackendDailyStreaksModel;
     backendDecisionOptionModel?:       BackendDecisionOptionModel;
@@ -43,6 +44,8 @@ export interface AcademixContracts {
     backendUserEngagementModel?:       BackendUserEngagementModel;
     backendUserLoginRecord?:           BackendUserLoginRecord;
     backendUserPartialRecord?:         BackendUserPartialRecord;
+    backendUserQuizCreatorQuestion?:   BackendUserQuizCreatorQuestion;
+    backendUserQuizCreatorTopic?:      BackendUserQuizCreatorTopic;
     getUserBalanceResponse?:           GetUserBalanceResponse;
 }
 
@@ -168,12 +171,12 @@ export interface BackendCountryRow {
  * topic_category is top-level). Keys mirror the RPC's jsonb_build_object projection.
  */
 export interface BackendCreatorCategoryRow {
-    age_control?:              any;
+    age_control?:              BackendControlItem[] | null;
     approval?:                 null | string;
-    country_control?:          any;
+    country_control?:          BackendControlItem[] | null;
     creator_details?:          BackendCreatorCategoryCreator | null;
-    gender_control?:           any;
-    language_control?:         any;
+    gender_control?:           BackendControlItem[] | null;
+    language_control?:         BackendControlItem[] | null;
     reviewer_id?:              null | string;
     sort_created_id:           string;
     sort_updated_id:           string;
@@ -204,6 +207,17 @@ export interface BackendCreatorTopicSettings {
     is_favourite?:        boolean | null;
     is_recents?:          boolean | null;
     settings_updated_at?: null | string;
+}
+
+/**
+ * The type_data block within fetch_questions / submit_question_content — NOTE this is a
+ * narrower 2-field shape than BackendPoolTypeModel (no question_type_local_identity). Do
+ * NOT reuse BackendPoolTypeModel here: its 3rd field is required and this RPC never returns
+ * it.
+ */
+export interface BackendCreatorTypeDataRow {
+    question_type_id:       string;
+    question_type_identity: string;
 }
 
 /**
@@ -845,6 +859,54 @@ export interface BackendUserPartialRecord {
     users_dob: string;
     users_id:  string;
     users_sex: string;
+}
+
+/**
+ * fetch_questions row / submit_question_content's questions_details (identical shape).
+ */
+export interface BackendUserQuizCreatorQuestion {
+    age_control?:         BackendControlItem[] | null;
+    approval?:            null | string;
+    country_control?:     BackendControlItem[] | null;
+    creator_details?:     BackendCreatorCategoryCreator | null;
+    gender_control?:      BackendControlItem[] | null;
+    language_control?:    BackendControlItem[] | null;
+    option_simple_data?:  number | null;
+    questions_created_at: string;
+    questions_id:         string;
+    questions_image?:     null | string;
+    questions_text:       string;
+    questions_updated_at: string;
+    reviewer_id?:         null | string;
+    sort_created_id:      string;
+    sort_updated_id:      string;
+    time_data?:           BackendPoolTimeModel | null;
+    topics_id:            string;
+    type_data?:           BackendCreatorTypeDataRow | null;
+}
+
+/**
+ * fetch_topics row / submit_topic_content's topics_details (identical shape).
+ */
+export interface BackendUserQuizCreatorTopic {
+    age_control?:           BackendControlItem[] | null;
+    approval?:              null | string;
+    country_control?:       BackendControlItem[] | null;
+    creator_details?:       BackendCreatorCategoryCreator | null;
+    gender_control?:        BackendControlItem[] | null;
+    general_questions?:     number | null;
+    language_control?:      BackendControlItem[] | null;
+    reviewer_id?:           null | string;
+    sort_created_id:        string;
+    sort_updated_id:        string;
+    topic_category_id:      string;
+    topic_settings?:        BackendCreatorTopicSettings | null;
+    topics_created_at:      string;
+    topics_id:              string;
+    topics_identity:        string;
+    topics_image?:          null | string;
+    topics_updated_at:      string;
+    user_created_question?: number | null;
 }
 
 /**

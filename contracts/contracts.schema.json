@@ -42,9 +42,71 @@
     "backendUserPartialRecord": { "$ref": "#/definitions/BackendUserPartialRecord" },
     "backendUserLoginRecord": { "$ref": "#/definitions/BackendUserLoginRecord" },
     "backendReferralData": { "$ref": "#/definitions/BackendReferralData" },
-    "backendTransactionStatusUpdate": { "$ref": "#/definitions/BackendTransactionStatusUpdate" }
+    "backendTransactionStatusUpdate": { "$ref": "#/definitions/BackendTransactionStatusUpdate" },
+    "backendCreatorTypeDataRow": { "$ref": "#/definitions/BackendCreatorTypeDataRow" },
+    "backendUserQuizCreatorQuestion": { "$ref": "#/definitions/BackendUserQuizCreatorQuestion" },
+    "backendUserQuizCreatorTopic": { "$ref": "#/definitions/BackendUserQuizCreatorTopic" }
   },
   "definitions": {
+    "BackendCreatorTypeDataRow": {
+      "type": "object", "additionalProperties": false,
+      "description": "The type_data block within fetch_questions / submit_question_content — NOTE this is a narrower 2-field shape than BackendPoolTypeModel (no question_type_local_identity). Do NOT reuse BackendPoolTypeModel here: its 3rd field is required and this RPC never returns it.",
+      "required": ["question_type_id", "question_type_identity"],
+      "properties": {
+        "question_type_id": { "type": "string" },
+        "question_type_identity": { "type": "string" }
+      }
+    },
+    "BackendUserQuizCreatorQuestion": {
+      "type": "object", "additionalProperties": false,
+      "description": "fetch_questions row / submit_question_content's questions_details (identical shape).",
+      "required": ["questions_id", "questions_created_at", "questions_updated_at", "sort_created_id", "sort_updated_id", "questions_text", "topics_id"],
+      "properties": {
+        "questions_id": { "type": "string" },
+        "questions_image": { "type": ["string", "null"] },
+        "questions_created_at": { "type": "string" },
+        "questions_updated_at": { "type": "string" },
+        "sort_created_id": { "type": "string" },
+        "sort_updated_id": { "type": "string" },
+        "questions_text": { "type": "string" },
+        "approval": { "type": ["string", "null"] },
+        "reviewer_id": { "type": ["string", "null"] },
+        "topics_id": { "type": "string" },
+        "option_simple_data": { "type": ["number", "null"] },
+        "time_data": { "oneOf": [{ "$ref": "#/definitions/BackendPoolTimeModel" }, { "type": "null" }] },
+        "type_data": { "oneOf": [{ "$ref": "#/definitions/BackendCreatorTypeDataRow" }, { "type": "null" }] },
+        "creator_details": { "oneOf": [{ "$ref": "#/definitions/BackendCreatorCategoryCreator" }, { "type": "null" }] },
+        "age_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } },
+        "country_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } },
+        "language_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } },
+        "gender_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } }
+      }
+    },
+    "BackendUserQuizCreatorTopic": {
+      "type": "object", "additionalProperties": false,
+      "description": "fetch_topics row / submit_topic_content's topics_details (identical shape).",
+      "required": ["topics_id", "topics_created_at", "topics_updated_at", "sort_created_id", "sort_updated_id", "topics_identity", "topic_category_id"],
+      "properties": {
+        "topics_id": { "type": "string" },
+        "topics_image": { "type": ["string", "null"] },
+        "topics_created_at": { "type": "string" },
+        "topics_updated_at": { "type": "string" },
+        "sort_created_id": { "type": "string" },
+        "sort_updated_id": { "type": "string" },
+        "topics_identity": { "type": "string" },
+        "approval": { "type": ["string", "null"] },
+        "reviewer_id": { "type": ["string", "null"] },
+        "topic_category_id": { "type": "string" },
+        "user_created_question": { "type": ["number", "null"] },
+        "general_questions": { "type": ["number", "null"] },
+        "topic_settings": { "oneOf": [{ "$ref": "#/definitions/BackendCreatorTopicSettings" }, { "type": "null" }] },
+        "creator_details": { "oneOf": [{ "$ref": "#/definitions/BackendCreatorCategoryCreator" }, { "type": "null" }] },
+        "age_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } },
+        "country_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } },
+        "language_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } },
+        "gender_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } }
+      }
+    },
     "BackendCountryRow": {
       "type": "object", "additionalProperties": false,
       "description": "fetch_country row (the full country record — a wider shape than the nested country_table block under get_user_record/BackendCountryData).",
@@ -195,10 +257,10 @@
         "user_created_question": { "type": ["number", "null"] },
         "topic_settings": { "oneOf": [{ "$ref": "#/definitions/BackendCreatorTopicSettings" }, { "type": "null" }] },
         "creator_details": { "oneOf": [{ "$ref": "#/definitions/BackendCreatorCategoryCreator" }, { "type": "null" }] },
-        "age_control": {},
-        "country_control": {},
-        "language_control": {},
-        "gender_control": {}
+        "age_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } },
+        "country_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } },
+        "language_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } },
+        "gender_control": { "type": ["array", "null"], "items": { "$ref": "#/definitions/BackendControlItem" } }
       }
     },
     "BackendCreatorTopicSettings": {

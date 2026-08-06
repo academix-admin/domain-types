@@ -22,6 +22,7 @@ class AcademixContracts {
     BackendControlItem? backendControlItem;
     BackendCountryRow? backendCountryRow;
     BackendCreatorCategoryRow? backendCreatorCategoryRow;
+    BackendCreatorTypeDataRow? backendCreatorTypeDataRow;
     BackendDailyPerformance? backendDailyPerformance;
     BackendDailyStreaksModel? backendDailyStreaksModel;
     BackendDecisionOptionModel? backendDecisionOptionModel;
@@ -52,6 +53,8 @@ class AcademixContracts {
     BackendUserEngagementModel? backendUserEngagementModel;
     BackendUserLoginRecord? backendUserLoginRecord;
     BackendUserPartialRecord? backendUserPartialRecord;
+    BackendUserQuizCreatorQuestion? backendUserQuizCreatorQuestion;
+    BackendUserQuizCreatorTopic? backendUserQuizCreatorTopic;
     GetUserBalanceResponse? getUserBalanceResponse;
 
     AcademixContracts({
@@ -62,6 +65,7 @@ class AcademixContracts {
         this.backendControlItem,
         this.backendCountryRow,
         this.backendCreatorCategoryRow,
+        this.backendCreatorTypeDataRow,
         this.backendDailyPerformance,
         this.backendDailyStreaksModel,
         this.backendDecisionOptionModel,
@@ -92,6 +96,8 @@ class AcademixContracts {
         this.backendUserEngagementModel,
         this.backendUserLoginRecord,
         this.backendUserPartialRecord,
+        this.backendUserQuizCreatorQuestion,
+        this.backendUserQuizCreatorTopic,
         this.getUserBalanceResponse,
     });
 
@@ -103,6 +109,7 @@ class AcademixContracts {
         backendControlItem: json["backendControlItem"] == null ? null : BackendControlItem.fromJson(json["backendControlItem"]),
         backendCountryRow: json["backendCountryRow"] == null ? null : BackendCountryRow.fromJson(json["backendCountryRow"]),
         backendCreatorCategoryRow: json["backendCreatorCategoryRow"] == null ? null : BackendCreatorCategoryRow.fromJson(json["backendCreatorCategoryRow"]),
+        backendCreatorTypeDataRow: json["backendCreatorTypeDataRow"] == null ? null : BackendCreatorTypeDataRow.fromJson(json["backendCreatorTypeDataRow"]),
         backendDailyPerformance: json["backendDailyPerformance"] == null ? null : BackendDailyPerformance.fromJson(json["backendDailyPerformance"]),
         backendDailyStreaksModel: json["backendDailyStreaksModel"] == null ? null : BackendDailyStreaksModel.fromJson(json["backendDailyStreaksModel"]),
         backendDecisionOptionModel: json["backendDecisionOptionModel"] == null ? null : BackendDecisionOptionModel.fromJson(json["backendDecisionOptionModel"]),
@@ -133,6 +140,8 @@ class AcademixContracts {
         backendUserEngagementModel: json["backendUserEngagementModel"] == null ? null : BackendUserEngagementModel.fromJson(json["backendUserEngagementModel"]),
         backendUserLoginRecord: json["backendUserLoginRecord"] == null ? null : BackendUserLoginRecord.fromJson(json["backendUserLoginRecord"]),
         backendUserPartialRecord: json["backendUserPartialRecord"] == null ? null : BackendUserPartialRecord.fromJson(json["backendUserPartialRecord"]),
+        backendUserQuizCreatorQuestion: json["backendUserQuizCreatorQuestion"] == null ? null : BackendUserQuizCreatorQuestion.fromJson(json["backendUserQuizCreatorQuestion"]),
+        backendUserQuizCreatorTopic: json["backendUserQuizCreatorTopic"] == null ? null : BackendUserQuizCreatorTopic.fromJson(json["backendUserQuizCreatorTopic"]),
         getUserBalanceResponse: json["getUserBalanceResponse"] == null ? null : GetUserBalanceResponse.fromJson(json["getUserBalanceResponse"]),
     );
 
@@ -144,6 +153,7 @@ class AcademixContracts {
         "backendControlItem": backendControlItem?.toJson(),
         "backendCountryRow": backendCountryRow?.toJson(),
         "backendCreatorCategoryRow": backendCreatorCategoryRow?.toJson(),
+        "backendCreatorTypeDataRow": backendCreatorTypeDataRow?.toJson(),
         "backendDailyPerformance": backendDailyPerformance?.toJson(),
         "backendDailyStreaksModel": backendDailyStreaksModel?.toJson(),
         "backendDecisionOptionModel": backendDecisionOptionModel?.toJson(),
@@ -174,6 +184,8 @@ class AcademixContracts {
         "backendUserEngagementModel": backendUserEngagementModel?.toJson(),
         "backendUserLoginRecord": backendUserLoginRecord?.toJson(),
         "backendUserPartialRecord": backendUserPartialRecord?.toJson(),
+        "backendUserQuizCreatorQuestion": backendUserQuizCreatorQuestion?.toJson(),
+        "backendUserQuizCreatorTopic": backendUserQuizCreatorTopic?.toJson(),
         "getUserBalanceResponse": getUserBalanceResponse?.toJson(),
     };
 }
@@ -591,12 +603,12 @@ class BackendCountryRow {
 ///fetch_categories row — a creator's topic category (post category_group removal;
 ///topic_category is top-level). Keys mirror the RPC's jsonb_build_object projection.
 class BackendCreatorCategoryRow {
-    dynamic ageControl;
+    List<BackendControlItem>? ageControl;
     String? approval;
-    dynamic countryControl;
+    List<BackendControlItem>? countryControl;
     BackendCreatorCategoryCreator? creatorDetails;
-    dynamic genderControl;
-    dynamic languageControl;
+    List<BackendControlItem>? genderControl;
+    List<BackendControlItem>? languageControl;
     String? reviewerId;
     String sortCreatedId;
     String sortUpdatedId;
@@ -630,12 +642,12 @@ class BackendCreatorCategoryRow {
     });
 
     factory BackendCreatorCategoryRow.fromJson(Map<String, dynamic> json) => BackendCreatorCategoryRow(
-        ageControl: json["age_control"],
+        ageControl: json["age_control"] == null ? [] : List<BackendControlItem>.from(json["age_control"]!.map((x) => BackendControlItem.fromJson(x))),
         approval: json["approval"],
-        countryControl: json["country_control"],
+        countryControl: json["country_control"] == null ? [] : List<BackendControlItem>.from(json["country_control"]!.map((x) => BackendControlItem.fromJson(x))),
         creatorDetails: json["creator_details"] == null ? null : BackendCreatorCategoryCreator.fromJson(json["creator_details"]),
-        genderControl: json["gender_control"],
-        languageControl: json["language_control"],
+        genderControl: json["gender_control"] == null ? [] : List<BackendControlItem>.from(json["gender_control"]!.map((x) => BackendControlItem.fromJson(x))),
+        languageControl: json["language_control"] == null ? [] : List<BackendControlItem>.from(json["language_control"]!.map((x) => BackendControlItem.fromJson(x))),
         reviewerId: json["reviewer_id"],
         sortCreatedId: json["sort_created_id"],
         sortUpdatedId: json["sort_updated_id"],
@@ -650,12 +662,12 @@ class BackendCreatorCategoryRow {
     );
 
     Map<String, dynamic> toJson() => {
-        "age_control": ageControl,
+        "age_control": ageControl == null ? [] : List<dynamic>.from(ageControl!.map((x) => x.toJson())),
         "approval": approval,
-        "country_control": countryControl,
+        "country_control": countryControl == null ? [] : List<dynamic>.from(countryControl!.map((x) => x.toJson())),
         "creator_details": creatorDetails?.toJson(),
-        "gender_control": genderControl,
-        "language_control": languageControl,
+        "gender_control": genderControl == null ? [] : List<dynamic>.from(genderControl!.map((x) => x.toJson())),
+        "language_control": languageControl == null ? [] : List<dynamic>.from(languageControl!.map((x) => x.toJson())),
         "reviewer_id": reviewerId,
         "sort_created_id": sortCreatedId,
         "sort_updated_id": sortUpdatedId,
@@ -723,6 +735,31 @@ class BackendCreatorTopicSettings {
         "is_favourite": isFavourite,
         "is_recents": isRecents,
         "settings_updated_at": settingsUpdatedAt,
+    };
+}
+
+
+///The type_data block within fetch_questions / submit_question_content — NOTE this is a
+///narrower 2-field shape than BackendPoolTypeModel (no question_type_local_identity). Do
+///NOT reuse BackendPoolTypeModel here: its 3rd field is required and this RPC never returns
+///it.
+class BackendCreatorTypeDataRow {
+    String questionTypeId;
+    String questionTypeIdentity;
+
+    BackendCreatorTypeDataRow({
+        required this.questionTypeId,
+        required this.questionTypeIdentity,
+    });
+
+    factory BackendCreatorTypeDataRow.fromJson(Map<String, dynamic> json) => BackendCreatorTypeDataRow(
+        questionTypeId: json["question_type_id"],
+        questionTypeIdentity: json["question_type_identity"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "question_type_id": questionTypeId,
+        "question_type_identity": questionTypeIdentity,
     };
 }
 
@@ -2918,6 +2955,178 @@ class BackendUserPartialRecord {
         "users_dob": usersDob,
         "users_id": usersId,
         "users_sex": usersSex,
+    };
+}
+
+
+///fetch_questions row / submit_question_content's questions_details (identical shape).
+class BackendUserQuizCreatorQuestion {
+    List<BackendControlItem>? ageControl;
+    String? approval;
+    List<BackendControlItem>? countryControl;
+    BackendCreatorCategoryCreator? creatorDetails;
+    List<BackendControlItem>? genderControl;
+    List<BackendControlItem>? languageControl;
+    double? optionSimpleData;
+    String questionsCreatedAt;
+    String questionsId;
+    String? questionsImage;
+    String questionsText;
+    String questionsUpdatedAt;
+    String? reviewerId;
+    String sortCreatedId;
+    String sortUpdatedId;
+    BackendPoolTimeModel? timeData;
+    String topicsId;
+    BackendCreatorTypeDataRow? typeData;
+
+    BackendUserQuizCreatorQuestion({
+        this.ageControl,
+        this.approval,
+        this.countryControl,
+        this.creatorDetails,
+        this.genderControl,
+        this.languageControl,
+        this.optionSimpleData,
+        required this.questionsCreatedAt,
+        required this.questionsId,
+        this.questionsImage,
+        required this.questionsText,
+        required this.questionsUpdatedAt,
+        this.reviewerId,
+        required this.sortCreatedId,
+        required this.sortUpdatedId,
+        this.timeData,
+        required this.topicsId,
+        this.typeData,
+    });
+
+    factory BackendUserQuizCreatorQuestion.fromJson(Map<String, dynamic> json) => BackendUserQuizCreatorQuestion(
+        ageControl: json["age_control"] == null ? [] : List<BackendControlItem>.from(json["age_control"]!.map((x) => BackendControlItem.fromJson(x))),
+        approval: json["approval"],
+        countryControl: json["country_control"] == null ? [] : List<BackendControlItem>.from(json["country_control"]!.map((x) => BackendControlItem.fromJson(x))),
+        creatorDetails: json["creator_details"] == null ? null : BackendCreatorCategoryCreator.fromJson(json["creator_details"]),
+        genderControl: json["gender_control"] == null ? [] : List<BackendControlItem>.from(json["gender_control"]!.map((x) => BackendControlItem.fromJson(x))),
+        languageControl: json["language_control"] == null ? [] : List<BackendControlItem>.from(json["language_control"]!.map((x) => BackendControlItem.fromJson(x))),
+        optionSimpleData: json["option_simple_data"]?.toDouble(),
+        questionsCreatedAt: json["questions_created_at"],
+        questionsId: json["questions_id"],
+        questionsImage: json["questions_image"],
+        questionsText: json["questions_text"],
+        questionsUpdatedAt: json["questions_updated_at"],
+        reviewerId: json["reviewer_id"],
+        sortCreatedId: json["sort_created_id"],
+        sortUpdatedId: json["sort_updated_id"],
+        timeData: json["time_data"] == null ? null : BackendPoolTimeModel.fromJson(json["time_data"]),
+        topicsId: json["topics_id"],
+        typeData: json["type_data"] == null ? null : BackendCreatorTypeDataRow.fromJson(json["type_data"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "age_control": ageControl == null ? [] : List<dynamic>.from(ageControl!.map((x) => x.toJson())),
+        "approval": approval,
+        "country_control": countryControl == null ? [] : List<dynamic>.from(countryControl!.map((x) => x.toJson())),
+        "creator_details": creatorDetails?.toJson(),
+        "gender_control": genderControl == null ? [] : List<dynamic>.from(genderControl!.map((x) => x.toJson())),
+        "language_control": languageControl == null ? [] : List<dynamic>.from(languageControl!.map((x) => x.toJson())),
+        "option_simple_data": optionSimpleData,
+        "questions_created_at": questionsCreatedAt,
+        "questions_id": questionsId,
+        "questions_image": questionsImage,
+        "questions_text": questionsText,
+        "questions_updated_at": questionsUpdatedAt,
+        "reviewer_id": reviewerId,
+        "sort_created_id": sortCreatedId,
+        "sort_updated_id": sortUpdatedId,
+        "time_data": timeData?.toJson(),
+        "topics_id": topicsId,
+        "type_data": typeData?.toJson(),
+    };
+}
+
+
+///fetch_topics row / submit_topic_content's topics_details (identical shape).
+class BackendUserQuizCreatorTopic {
+    List<BackendControlItem>? ageControl;
+    String? approval;
+    List<BackendControlItem>? countryControl;
+    BackendCreatorCategoryCreator? creatorDetails;
+    List<BackendControlItem>? genderControl;
+    double? generalQuestions;
+    List<BackendControlItem>? languageControl;
+    String? reviewerId;
+    String sortCreatedId;
+    String sortUpdatedId;
+    String topicCategoryId;
+    BackendCreatorTopicSettings? topicSettings;
+    String topicsCreatedAt;
+    String topicsId;
+    String topicsIdentity;
+    String? topicsImage;
+    String topicsUpdatedAt;
+    double? userCreatedQuestion;
+
+    BackendUserQuizCreatorTopic({
+        this.ageControl,
+        this.approval,
+        this.countryControl,
+        this.creatorDetails,
+        this.genderControl,
+        this.generalQuestions,
+        this.languageControl,
+        this.reviewerId,
+        required this.sortCreatedId,
+        required this.sortUpdatedId,
+        required this.topicCategoryId,
+        this.topicSettings,
+        required this.topicsCreatedAt,
+        required this.topicsId,
+        required this.topicsIdentity,
+        this.topicsImage,
+        required this.topicsUpdatedAt,
+        this.userCreatedQuestion,
+    });
+
+    factory BackendUserQuizCreatorTopic.fromJson(Map<String, dynamic> json) => BackendUserQuizCreatorTopic(
+        ageControl: json["age_control"] == null ? [] : List<BackendControlItem>.from(json["age_control"]!.map((x) => BackendControlItem.fromJson(x))),
+        approval: json["approval"],
+        countryControl: json["country_control"] == null ? [] : List<BackendControlItem>.from(json["country_control"]!.map((x) => BackendControlItem.fromJson(x))),
+        creatorDetails: json["creator_details"] == null ? null : BackendCreatorCategoryCreator.fromJson(json["creator_details"]),
+        genderControl: json["gender_control"] == null ? [] : List<BackendControlItem>.from(json["gender_control"]!.map((x) => BackendControlItem.fromJson(x))),
+        generalQuestions: json["general_questions"]?.toDouble(),
+        languageControl: json["language_control"] == null ? [] : List<BackendControlItem>.from(json["language_control"]!.map((x) => BackendControlItem.fromJson(x))),
+        reviewerId: json["reviewer_id"],
+        sortCreatedId: json["sort_created_id"],
+        sortUpdatedId: json["sort_updated_id"],
+        topicCategoryId: json["topic_category_id"],
+        topicSettings: json["topic_settings"] == null ? null : BackendCreatorTopicSettings.fromJson(json["topic_settings"]),
+        topicsCreatedAt: json["topics_created_at"],
+        topicsId: json["topics_id"],
+        topicsIdentity: json["topics_identity"],
+        topicsImage: json["topics_image"],
+        topicsUpdatedAt: json["topics_updated_at"],
+        userCreatedQuestion: json["user_created_question"]?.toDouble(),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "age_control": ageControl == null ? [] : List<dynamic>.from(ageControl!.map((x) => x.toJson())),
+        "approval": approval,
+        "country_control": countryControl == null ? [] : List<dynamic>.from(countryControl!.map((x) => x.toJson())),
+        "creator_details": creatorDetails?.toJson(),
+        "gender_control": genderControl == null ? [] : List<dynamic>.from(genderControl!.map((x) => x.toJson())),
+        "general_questions": generalQuestions,
+        "language_control": languageControl == null ? [] : List<dynamic>.from(languageControl!.map((x) => x.toJson())),
+        "reviewer_id": reviewerId,
+        "sort_created_id": sortCreatedId,
+        "sort_updated_id": sortUpdatedId,
+        "topic_category_id": topicCategoryId,
+        "topic_settings": topicSettings?.toJson(),
+        "topics_created_at": topicsCreatedAt,
+        "topics_id": topicsId,
+        "topics_identity": topicsIdentity,
+        "topics_image": topicsImage,
+        "topics_updated_at": topicsUpdatedAt,
+        "user_created_question": userCreatedQuestion,
     };
 }
 
