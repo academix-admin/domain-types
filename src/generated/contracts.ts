@@ -6,6 +6,7 @@
  * every reachable type. Regenerate TS + Dart with `npm run gen`.
  */
 export interface AcademixContracts {
+    backendAcademixRatioResult?:       BackendAcademixRatioResult;
     backendAchievementsData?:          BackendAchievementsData;
     backendAchievementsModel?:         BackendAchievementsModel;
     backendBuyPaymentWalletModel?:     BackendBuyPaymentWalletModel;
@@ -47,6 +48,16 @@ export interface AcademixContracts {
     backendUserQuizCreatorQuestion?:   BackendUserQuizCreatorQuestion;
     backendUserQuizCreatorTopic?:      BackendUserQuizCreatorTopic;
     getUserBalanceResponse?:           GetUserBalanceResponse;
+}
+
+/**
+ * get_user_academix_ratio result envelope (verified against the live function body — also
+ * returns a debug `called` field, not modeled here since the client never reads it).
+ */
+export interface BackendAcademixRatioResult {
+    academix_ratio?: number | null;
+    error?:          null | string;
+    status:          string;
 }
 
 /**

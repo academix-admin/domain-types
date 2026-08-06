@@ -15,6 +15,7 @@ String academixContractsToJson(AcademixContracts data) => json.encode(data.toJso
 ///function's RETURN builder. The root references the top-level ones so the generator emits
 ///every reachable type. Regenerate TS + Dart with `npm run gen`.
 class AcademixContracts {
+    BackendAcademixRatioResult? backendAcademixRatioResult;
     BackendAchievementsData? backendAchievementsData;
     BackendAchievementsModel? backendAchievementsModel;
     BackendBuyPaymentWalletModel? backendBuyPaymentWalletModel;
@@ -58,6 +59,7 @@ class AcademixContracts {
     GetUserBalanceResponse? getUserBalanceResponse;
 
     AcademixContracts({
+        this.backendAcademixRatioResult,
         this.backendAchievementsData,
         this.backendAchievementsModel,
         this.backendBuyPaymentWalletModel,
@@ -102,6 +104,7 @@ class AcademixContracts {
     });
 
     factory AcademixContracts.fromJson(Map<String, dynamic> json) => AcademixContracts(
+        backendAcademixRatioResult: json["backendAcademixRatioResult"] == null ? null : BackendAcademixRatioResult.fromJson(json["backendAcademixRatioResult"]),
         backendAchievementsData: json["backendAchievementsData"] == null ? null : BackendAchievementsData.fromJson(json["backendAchievementsData"]),
         backendAchievementsModel: json["backendAchievementsModel"] == null ? null : BackendAchievementsModel.fromJson(json["backendAchievementsModel"]),
         backendBuyPaymentWalletModel: json["backendBuyPaymentWalletModel"] == null ? null : BackendBuyPaymentWalletModel.fromJson(json["backendBuyPaymentWalletModel"]),
@@ -146,6 +149,7 @@ class AcademixContracts {
     );
 
     Map<String, dynamic> toJson() => {
+        "backendAcademixRatioResult": backendAcademixRatioResult?.toJson(),
         "backendAchievementsData": backendAchievementsData?.toJson(),
         "backendAchievementsModel": backendAchievementsModel?.toJson(),
         "backendBuyPaymentWalletModel": backendBuyPaymentWalletModel?.toJson(),
@@ -187,6 +191,33 @@ class AcademixContracts {
         "backendUserQuizCreatorQuestion": backendUserQuizCreatorQuestion?.toJson(),
         "backendUserQuizCreatorTopic": backendUserQuizCreatorTopic?.toJson(),
         "getUserBalanceResponse": getUserBalanceResponse?.toJson(),
+    };
+}
+
+
+///get_user_academix_ratio result envelope (verified against the live function body — also
+///returns a debug `called` field, not modeled here since the client never reads it).
+class BackendAcademixRatioResult {
+    double? academixRatio;
+    String? error;
+    String status;
+
+    BackendAcademixRatioResult({
+        this.academixRatio,
+        this.error,
+        required this.status,
+    });
+
+    factory BackendAcademixRatioResult.fromJson(Map<String, dynamic> json) => BackendAcademixRatioResult(
+        academixRatio: json["academix_ratio"]?.toDouble(),
+        error: json["error"],
+        status: json["status"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "academix_ratio": academixRatio,
+        "error": error,
+        "status": status,
     };
 }
 

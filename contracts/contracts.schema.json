@@ -45,7 +45,8 @@
     "backendTransactionStatusUpdate": { "$ref": "#/definitions/BackendTransactionStatusUpdate" },
     "backendCreatorTypeDataRow": { "$ref": "#/definitions/BackendCreatorTypeDataRow" },
     "backendUserQuizCreatorQuestion": { "$ref": "#/definitions/BackendUserQuizCreatorQuestion" },
-    "backendUserQuizCreatorTopic": { "$ref": "#/definitions/BackendUserQuizCreatorTopic" }
+    "backendUserQuizCreatorTopic": { "$ref": "#/definitions/BackendUserQuizCreatorTopic" },
+    "backendAcademixRatioResult": { "$ref": "#/definitions/BackendAcademixRatioResult" }
   },
   "definitions": {
     "BackendCreatorTypeDataRow": {
@@ -183,6 +184,16 @@
         "time": { "type": ["string", "null"] },
         "sort": { "type": ["string", "null"] },
         "message": { "type": ["string", "null"] }
+      }
+    },
+    "BackendAcademixRatioResult": {
+      "type": "object", "additionalProperties": false,
+      "description": "get_user_academix_ratio result envelope (verified against the live function body — also returns a debug `called` field, not modeled here since the client never reads it).",
+      "required": ["status"],
+      "properties": {
+        "status": { "type": "string" },
+        "error": { "type": ["string", "null"] },
+        "academix_ratio": { "type": ["number", "null"] }
       }
     },
     "BackendRedirectResult": {
