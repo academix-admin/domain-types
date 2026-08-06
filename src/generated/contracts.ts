@@ -11,6 +11,7 @@ export interface AcademixContracts {
     backendAchievementsModel?:         BackendAchievementsModel;
     backendBuyPaymentWalletModel?:     BackendBuyPaymentWalletModel;
     backendChallengeConfigRoot?:       { [key: string]: BackendChallengeConfig };
+    backendContentResponse?:           BackendContentResponse;
     backendControlItem?:               BackendControlItem;
     backendCountryRow?:                BackendCountryRow;
     backendCreatorCategoryRow?:        BackendCreatorCategoryRow;
@@ -22,6 +23,7 @@ export interface AcademixContracts {
     backendFriendsModel?:              BackendFriendsModel;
     backendGiveBackModel?:             BackendGiveBackModel;
     backendLanguageRow?:               BackendLanguageRow;
+    backendLeaveQuizResult?:           BackendLeaveQuizResult;
     backendMissionData?:               BackendMissionData;
     backendMissionModel?:              BackendMissionModel;
     backendPaymentCompletionData?:     BackendPaymentCompletionData;
@@ -29,6 +31,7 @@ export interface AcademixContracts {
     backendPaymentProfileModel?:       BackendPaymentProfileModel;
     backendPoolMemberModel?:           BackendPoolMemberModel;
     backendPoolQuestion?:              BackendPoolQuestion;
+    backendProfileUpdateResult?:       BackendProfileUpdateResult;
     backendQuizHistory?:               BackendQuizHistory;
     backendRedeemCodeModel?:           BackendRedeemCodeModel;
     backendRedirectResult?:            BackendRedirectResult;
@@ -149,6 +152,17 @@ export interface BackendChallengeOption {
     challenge_reviewer_share:     number;
     challenge_role_share:         { [key: string]: number };
     challenge_top_share:          number;
+}
+
+/**
+ * The raw AI-moderation verdict returned inline (as `response`) by the
+ * submit_category_content / submit_topic_content / submit_question_content Lambdas when
+ * content fails their EdenAI check — not an RPC, but part of the Lambda's wire response.
+ */
+export interface BackendContentResponse {
+    suggested: string;
+    verified:  boolean;
+    violated:  string[];
 }
 
 /**
@@ -343,6 +357,15 @@ export interface BackendLanguageRow {
 }
 
 /**
+ * leave_active_quiz_pool result envelope (verified against the live function body).
+ */
+export interface BackendLeaveQuizResult {
+    error?:    null | string;
+    pools_id?: null | string;
+    status:    string;
+}
+
+/**
  * get_user_missions_count
  */
 export interface BackendMissionData {
@@ -531,6 +554,16 @@ export interface BackendPoolTypeModel {
     question_type_id:             string;
     question_type_identity:       string;
     question_type_local_identity: string;
+}
+
+/**
+ * Shared envelope for update_user_fullname / update_user_email / update_user_phone /
+ * update_user_username (verified against all 4 live function bodies — identical shape).
+ */
+export interface BackendProfileUpdateResult {
+    error?:         null | string;
+    profile_value?: null | string;
+    status:         string;
 }
 
 /**

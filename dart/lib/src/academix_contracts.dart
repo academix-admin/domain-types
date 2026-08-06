@@ -20,6 +20,7 @@ class AcademixContracts {
     BackendAchievementsModel? backendAchievementsModel;
     BackendBuyPaymentWalletModel? backendBuyPaymentWalletModel;
     Map<String, BackendChallengeConfig>? backendChallengeConfigRoot;
+    BackendContentResponse? backendContentResponse;
     BackendControlItem? backendControlItem;
     BackendCountryRow? backendCountryRow;
     BackendCreatorCategoryRow? backendCreatorCategoryRow;
@@ -31,6 +32,7 @@ class AcademixContracts {
     BackendFriendsModel? backendFriendsModel;
     BackendGiveBackModel? backendGiveBackModel;
     BackendLanguageRow? backendLanguageRow;
+    BackendLeaveQuizResult? backendLeaveQuizResult;
     BackendMissionData? backendMissionData;
     BackendMissionModel? backendMissionModel;
     BackendPaymentCompletionData? backendPaymentCompletionData;
@@ -38,6 +40,7 @@ class AcademixContracts {
     BackendPaymentProfileModel? backendPaymentProfileModel;
     BackendPoolMemberModel? backendPoolMemberModel;
     BackendPoolQuestion? backendPoolQuestion;
+    BackendProfileUpdateResult? backendProfileUpdateResult;
     BackendQuizHistory? backendQuizHistory;
     BackendRedeemCodeModel? backendRedeemCodeModel;
     BackendRedirectResult? backendRedirectResult;
@@ -64,6 +67,7 @@ class AcademixContracts {
         this.backendAchievementsModel,
         this.backendBuyPaymentWalletModel,
         this.backendChallengeConfigRoot,
+        this.backendContentResponse,
         this.backendControlItem,
         this.backendCountryRow,
         this.backendCreatorCategoryRow,
@@ -75,6 +79,7 @@ class AcademixContracts {
         this.backendFriendsModel,
         this.backendGiveBackModel,
         this.backendLanguageRow,
+        this.backendLeaveQuizResult,
         this.backendMissionData,
         this.backendMissionModel,
         this.backendPaymentCompletionData,
@@ -82,6 +87,7 @@ class AcademixContracts {
         this.backendPaymentProfileModel,
         this.backendPoolMemberModel,
         this.backendPoolQuestion,
+        this.backendProfileUpdateResult,
         this.backendQuizHistory,
         this.backendRedeemCodeModel,
         this.backendRedirectResult,
@@ -109,6 +115,7 @@ class AcademixContracts {
         backendAchievementsModel: json["backendAchievementsModel"] == null ? null : BackendAchievementsModel.fromJson(json["backendAchievementsModel"]),
         backendBuyPaymentWalletModel: json["backendBuyPaymentWalletModel"] == null ? null : BackendBuyPaymentWalletModel.fromJson(json["backendBuyPaymentWalletModel"]),
         backendChallengeConfigRoot: Map.from(json["backendChallengeConfigRoot"]!).map((k, v) => MapEntry<String, BackendChallengeConfig>(k, BackendChallengeConfig.fromJson(v))),
+        backendContentResponse: json["backendContentResponse"] == null ? null : BackendContentResponse.fromJson(json["backendContentResponse"]),
         backendControlItem: json["backendControlItem"] == null ? null : BackendControlItem.fromJson(json["backendControlItem"]),
         backendCountryRow: json["backendCountryRow"] == null ? null : BackendCountryRow.fromJson(json["backendCountryRow"]),
         backendCreatorCategoryRow: json["backendCreatorCategoryRow"] == null ? null : BackendCreatorCategoryRow.fromJson(json["backendCreatorCategoryRow"]),
@@ -120,6 +127,7 @@ class AcademixContracts {
         backendFriendsModel: json["backendFriendsModel"] == null ? null : BackendFriendsModel.fromJson(json["backendFriendsModel"]),
         backendGiveBackModel: json["backendGiveBackModel"] == null ? null : BackendGiveBackModel.fromJson(json["backendGiveBackModel"]),
         backendLanguageRow: json["backendLanguageRow"] == null ? null : BackendLanguageRow.fromJson(json["backendLanguageRow"]),
+        backendLeaveQuizResult: json["backendLeaveQuizResult"] == null ? null : BackendLeaveQuizResult.fromJson(json["backendLeaveQuizResult"]),
         backendMissionData: json["backendMissionData"] == null ? null : BackendMissionData.fromJson(json["backendMissionData"]),
         backendMissionModel: json["backendMissionModel"] == null ? null : BackendMissionModel.fromJson(json["backendMissionModel"]),
         backendPaymentCompletionData: json["backendPaymentCompletionData"] == null ? null : BackendPaymentCompletionData.fromJson(json["backendPaymentCompletionData"]),
@@ -127,6 +135,7 @@ class AcademixContracts {
         backendPaymentProfileModel: json["backendPaymentProfileModel"] == null ? null : BackendPaymentProfileModel.fromJson(json["backendPaymentProfileModel"]),
         backendPoolMemberModel: json["backendPoolMemberModel"] == null ? null : BackendPoolMemberModel.fromJson(json["backendPoolMemberModel"]),
         backendPoolQuestion: json["backendPoolQuestion"] == null ? null : BackendPoolQuestion.fromJson(json["backendPoolQuestion"]),
+        backendProfileUpdateResult: json["backendProfileUpdateResult"] == null ? null : BackendProfileUpdateResult.fromJson(json["backendProfileUpdateResult"]),
         backendQuizHistory: json["backendQuizHistory"] == null ? null : BackendQuizHistory.fromJson(json["backendQuizHistory"]),
         backendRedeemCodeModel: json["backendRedeemCodeModel"] == null ? null : BackendRedeemCodeModel.fromJson(json["backendRedeemCodeModel"]),
         backendRedirectResult: json["backendRedirectResult"] == null ? null : BackendRedirectResult.fromJson(json["backendRedirectResult"]),
@@ -154,6 +163,7 @@ class AcademixContracts {
         "backendAchievementsModel": backendAchievementsModel?.toJson(),
         "backendBuyPaymentWalletModel": backendBuyPaymentWalletModel?.toJson(),
         "backendChallengeConfigRoot": Map.from(backendChallengeConfigRoot!).map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
+        "backendContentResponse": backendContentResponse?.toJson(),
         "backendControlItem": backendControlItem?.toJson(),
         "backendCountryRow": backendCountryRow?.toJson(),
         "backendCreatorCategoryRow": backendCreatorCategoryRow?.toJson(),
@@ -165,6 +175,7 @@ class AcademixContracts {
         "backendFriendsModel": backendFriendsModel?.toJson(),
         "backendGiveBackModel": backendGiveBackModel?.toJson(),
         "backendLanguageRow": backendLanguageRow?.toJson(),
+        "backendLeaveQuizResult": backendLeaveQuizResult?.toJson(),
         "backendMissionData": backendMissionData?.toJson(),
         "backendMissionModel": backendMissionModel?.toJson(),
         "backendPaymentCompletionData": backendPaymentCompletionData?.toJson(),
@@ -172,6 +183,7 @@ class AcademixContracts {
         "backendPaymentProfileModel": backendPaymentProfileModel?.toJson(),
         "backendPoolMemberModel": backendPoolMemberModel?.toJson(),
         "backendPoolQuestion": backendPoolQuestion?.toJson(),
+        "backendProfileUpdateResult": backendProfileUpdateResult?.toJson(),
         "backendQuizHistory": backendQuizHistory?.toJson(),
         "backendRedeemCodeModel": backendRedeemCodeModel?.toJson(),
         "backendRedirectResult": backendRedirectResult?.toJson(),
@@ -552,6 +564,34 @@ class BackendChallengeOption {
         "challenge_reviewer_share": challengeReviewerShare,
         "challenge_role_share": Map.from(challengeRoleShare).map((k, v) => MapEntry<String, dynamic>(k, v)),
         "challenge_top_share": challengeTopShare,
+    };
+}
+
+
+///The raw AI-moderation verdict returned inline (as `response`) by the
+///submit_category_content / submit_topic_content / submit_question_content Lambdas when
+///content fails their EdenAI check — not an RPC, but part of the Lambda's wire response.
+class BackendContentResponse {
+    String suggested;
+    bool verified;
+    List<String> violated;
+
+    BackendContentResponse({
+        required this.suggested,
+        required this.verified,
+        required this.violated,
+    });
+
+    factory BackendContentResponse.fromJson(Map<String, dynamic> json) => BackendContentResponse(
+        suggested: json["suggested"],
+        verified: json["verified"],
+        violated: List<String>.from(json["violated"].map((x) => x)),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "suggested": suggested,
+        "verified": verified,
+        "violated": List<dynamic>.from(violated.map((x) => x)),
     };
 }
 
@@ -1153,6 +1193,32 @@ class BackendLanguageRow {
         "language_id": languageId,
         "language_identity": languageIdentity,
         "language_symbol": languageSymbol,
+    };
+}
+
+
+///leave_active_quiz_pool result envelope (verified against the live function body).
+class BackendLeaveQuizResult {
+    String? error;
+    String? poolsId;
+    String status;
+
+    BackendLeaveQuizResult({
+        this.error,
+        this.poolsId,
+        required this.status,
+    });
+
+    factory BackendLeaveQuizResult.fromJson(Map<String, dynamic> json) => BackendLeaveQuizResult(
+        error: json["error"],
+        poolsId: json["pools_id"],
+        status: json["status"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "error": error,
+        "pools_id": poolsId,
+        "status": status,
     };
 }
 
@@ -1814,6 +1880,33 @@ class BackendPoolTypeModel {
         "question_type_id": questionTypeId,
         "question_type_identity": questionTypeIdentity,
         "question_type_local_identity": questionTypeLocalIdentity,
+    };
+}
+
+
+///Shared envelope for update_user_fullname / update_user_email / update_user_phone /
+///update_user_username (verified against all 4 live function bodies — identical shape).
+class BackendProfileUpdateResult {
+    String? error;
+    String? profileValue;
+    String status;
+
+    BackendProfileUpdateResult({
+        this.error,
+        this.profileValue,
+        required this.status,
+    });
+
+    factory BackendProfileUpdateResult.fromJson(Map<String, dynamic> json) => BackendProfileUpdateResult(
+        error: json["error"],
+        profileValue: json["profile_value"],
+        status: json["status"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "error": error,
+        "profile_value": profileValue,
+        "status": status,
     };
 }
 

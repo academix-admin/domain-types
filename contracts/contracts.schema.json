@@ -46,7 +46,10 @@
     "backendCreatorTypeDataRow": { "$ref": "#/definitions/BackendCreatorTypeDataRow" },
     "backendUserQuizCreatorQuestion": { "$ref": "#/definitions/BackendUserQuizCreatorQuestion" },
     "backendUserQuizCreatorTopic": { "$ref": "#/definitions/BackendUserQuizCreatorTopic" },
-    "backendAcademixRatioResult": { "$ref": "#/definitions/BackendAcademixRatioResult" }
+    "backendAcademixRatioResult": { "$ref": "#/definitions/BackendAcademixRatioResult" },
+    "backendContentResponse": { "$ref": "#/definitions/BackendContentResponse" },
+    "backendLeaveQuizResult": { "$ref": "#/definitions/BackendLeaveQuizResult" },
+    "backendProfileUpdateResult": { "$ref": "#/definitions/BackendProfileUpdateResult" }
   },
   "definitions": {
     "BackendCreatorTypeDataRow": {
@@ -194,6 +197,36 @@
         "status": { "type": "string" },
         "error": { "type": ["string", "null"] },
         "academix_ratio": { "type": ["number", "null"] }
+      }
+    },
+    "BackendContentResponse": {
+      "type": "object", "additionalProperties": false,
+      "description": "The raw AI-moderation verdict returned inline (as `response`) by the submit_category_content / submit_topic_content / submit_question_content Lambdas when content fails their EdenAI check — not an RPC, but part of the Lambda's wire response.",
+      "required": ["verified", "violated", "suggested"],
+      "properties": {
+        "verified": { "type": "boolean" },
+        "violated": { "type": "array", "items": { "type": "string" } },
+        "suggested": { "type": "string" }
+      }
+    },
+    "BackendLeaveQuizResult": {
+      "type": "object", "additionalProperties": false,
+      "description": "leave_active_quiz_pool result envelope (verified against the live function body).",
+      "required": ["status"],
+      "properties": {
+        "status": { "type": "string" },
+        "error": { "type": ["string", "null"] },
+        "pools_id": { "type": ["string", "null"] }
+      }
+    },
+    "BackendProfileUpdateResult": {
+      "type": "object", "additionalProperties": false,
+      "description": "Shared envelope for update_user_fullname / update_user_email / update_user_phone / update_user_username (verified against all 4 live function bodies — identical shape).",
+      "required": ["status"],
+      "properties": {
+        "status": { "type": "string" },
+        "error": { "type": ["string", "null"] },
+        "profile_value": { "type": ["string", "null"] }
       }
     },
     "BackendRedirectResult": {
