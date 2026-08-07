@@ -677,19 +677,21 @@ export interface BackendSellPaymentWalletModel {
 
 /**
  * Response body of a PostgREST request refused by public.enforce_session() — the
- * db_pre_request session gate (HTTP 423 app-locked, or HTTP 401 session-revoked). Every
- * client (web fetch interceptor, Flutter SessionGateHttpClient, any future platform) parses
- * this SAME shape instead of hand-decoding the raw PGRST sentinel. account_exists is only
- * meaningful for AX_APP_LOCKED — it tells the client whether this is a real,
- * previously-authenticated account (show the PIN unlock overlay) or a session with no
- * profile yet (never happens in practice today, since a brand-new session gets a full idle
- * window before it can lock, but clients must not assume — trust this field, not local
- * cache state).
+ * db_pre_request session gate (HTTP 423 app-locked, or HTTP 401 session-revoked), raised
+ * via `RAISE SQLSTATE 'PGRST'`. Every client (web fetch interceptor, Flutter
+ * SessionGateHttpClient, any future platform) parses this SAME shape instead of
+ * hand-decoding the raw PGRST sentinel. IMPORTANT: PostgREST's PGRST convention only
+ * extracts code/message/details/hint from the raised message JSON onto the response body —
+ * any other key is silently dropped (verified live: a 5th custom key never reached the
+ * client at all). The gate's account_exists flag (AX_APP_LOCKED only: whether this is a
+ * real, previously-authenticated account vs. a session with no profile yet — trust it,
+ * don't infer from local cache state) therefore rides in the `X-Ax-Account-Exists` response
+ * HEADER instead ('true'/'false' string), which PostgREST's `detail.headers` DOES pass
+ * through unmodified. Read it off the response, not this body.
  */
 export interface BackendSessionGateError {
-    account_exists: boolean;
-    code:           string;
-    message:        string;
+    code:    string;
+    message: string;
 }
 
 /**
