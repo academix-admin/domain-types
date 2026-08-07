@@ -2584,12 +2584,14 @@ class BackendUserData {
 }
 
 
-///country_table is nullable at the DB level (users_table.country_id is FK-enforced NOT
-///NULL, but country_table.country_image itself is a nullable column — not every country has
-///an uploaded image yet).
+///country_image is a nullable DB column (not every country has an uploaded image).
+///country_identity is produced by translate(country_identity, p_locale) with no
+///fallback_locales/use_default — translate() genuinely returns NULL when the requested
+///locale isn't a key in the jsonb (verified: this is the actual cause of a production
+///crash, not a hypothetical).
 class BackendCountryData {
     String countryId;
-    String countryIdentity;
+    String? countryIdentity;
     String? countryImage;
     String countryTwoIsoCode;
 
@@ -2615,10 +2617,15 @@ class BackendCountryData {
     };
 }
 
+
+///language_identity is produced by translate(language_identity, p_locale) with no
+///fallback_locales/use_default — translate() genuinely returns NULL translation when the
+///requested locale isn't a key in the jsonb (verified: this is the actual cause of a
+///production crash, not a hypothetical).
 class BackendLanguageData {
     String languageCode;
     String languageId;
-    String languageIdentity;
+    String? languageIdentity;
 
     BackendLanguageData({
         required this.languageCode,

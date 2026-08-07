@@ -896,20 +896,21 @@
     },
     "BackendLanguageData": {
       "type": "object", "additionalProperties": false,
+      "description": "language_identity is produced by translate(language_identity, p_locale) with no fallback_locales/use_default — translate() genuinely returns NULL translation when the requested locale isn't a key in the jsonb (verified: this is the actual cause of a production crash, not a hypothetical).",
       "required": ["language_id", "language_identity", "language_code"],
       "properties": {
         "language_id": { "type": "string" },
-        "language_identity": { "type": "string" },
+        "language_identity": { "type": ["string", "null"] },
         "language_code": { "type": "string" }
       }
     },
     "BackendCountryData": {
       "type": "object", "additionalProperties": false,
-      "description": "country_table is nullable at the DB level (users_table.country_id is FK-enforced NOT NULL, but country_table.country_image itself is a nullable column — not every country has an uploaded image yet).",
+      "description": "country_image is a nullable DB column (not every country has an uploaded image). country_identity is produced by translate(country_identity, p_locale) with no fallback_locales/use_default — translate() genuinely returns NULL when the requested locale isn't a key in the jsonb (verified: this is the actual cause of a production crash, not a hypothetical).",
       "required": ["country_id", "country_identity", "country_image", "country_two_iso_code"],
       "properties": {
         "country_id": { "type": "string" },
-        "country_identity": { "type": "string" },
+        "country_identity": { "type": ["string", "null"] },
         "country_image": { "type": ["string", "null"] },
         "country_two_iso_code": { "type": "string" }
       }
